@@ -1,576 +1,560 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
-<html>
+<!DOCTYPE html>
+<html lang="ko">
 <head>
-  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-  <meta http-equiv="Content-Style-Type" content="text/css">
-  <title></title>
-  <meta name="Generator" content="Cocoa HTML Writer">
-  <meta name="CocoaVersion" content="2575.6">
-  <style type="text/css">
-    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica}
-    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica; min-height: 14.0px}
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MBTI 성격 유형으로 찾는 나의 '성경적 소울네임'</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&family=Montserrat:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Noto Sans KR', sans-serif;
+        }
+        .en body, .en [lang="en"] { font-family: 'Montserrat', sans-serif; }
+        .es body, .es [lang="es"] { font-family: 'Montserrat', sans-serif; }
+
+        .fade-in { animation: fadeIn 0.8s ease-in-out; }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .result-card {
+            background-color: #ffffff;
+            border-radius: 20px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1), 0 5px 10px rgba(0, 0, 0, 0.04);
+            border: 1px solid #f0f0f0;
+            overflow: hidden;
+        }
+        .result-header {
+            background: linear-gradient(135deg, #a8c0ff, #3f2b96);
+            color: white;
+            padding: 2.5rem 1.5rem;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.2);
+        }
+        .custom-btn {
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 6px rgba(50, 50, 93, 0.11), 0 1px 3px rgba(0, 0, 0, 0.08);
+        }
+        .custom-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 7px 14px rgba(50, 50, 93, 0.1), 0 3px 6px rgba(0, 0, 0, 0.08);
+        }
+        .loader {
+            border: 6px solid #f3f3f3;
+            border-top: 6px solid #6366f1;
+            border-radius: 50%;
+            width: 60px;
+            height: 60px;
+            animation: spin 1.5s linear infinite;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        /* Animation for the Saju link */
+        @keyframes pulse {
+          0%, 100% {
+            transform: scale(1);
+          }
+          50% {
+            transform: scale(1.03);
+          }
+        }
+        .saju-link-animated {
+            animation: pulse 3s infinite ease-in-out;
+            transition: transform 0.3s ease;
+            display: inline-block; /* To apply transform */
+        }
+        .saju-link-animated:hover {
+            animation-play-state: paused;
+            transform: scale(1.08);
+        }
+    </style>
 </head>
-<body>
-<p class="p1">&lt;!DOCTYPE html&gt;</p>
-<p class="p1">&lt;html lang="ko"&gt;</p>
-<p class="p1">&lt;head&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;meta charset="UTF-8"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;title&gt;MBTI 성격 유형으로 찾는 나의 '성경적 소울네임'&lt;/title&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;script src="https://cdn.tailwindcss.com"&gt;&lt;/script&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;link rel="preconnect" href="https://fonts.googleapis.com"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;link rel="preconnect" href="https://fonts.gstatic.com" crossorigin&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&amp;family=Montserrat:wght@400;500;700&amp;display=swap" rel="stylesheet"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;style&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>body {</p>
-<p class="p1"><span class="Apple-converted-space">            </span>font-family: 'Noto Sans KR', sans-serif;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>}</p>
-<p class="p1"><span class="Apple-converted-space">        </span>.en body, .en [lang="en"] { font-family: 'Montserrat', sans-serif; }</p>
-<p class="p1"><span class="Apple-converted-space">        </span>.es body, .es [lang="es"] { font-family: 'Montserrat', sans-serif; }</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">        </span>.fade-in { animation: fadeIn 0.8s ease-in-out; }</p>
-<p class="p1"><span class="Apple-converted-space">        </span>@keyframes fadeIn {</p>
-<p class="p1"><span class="Apple-converted-space">            </span>from { opacity: 0; transform: translateY(20px); }</p>
-<p class="p1"><span class="Apple-converted-space">            </span>to { opacity: 1; transform: translateY(0); }</p>
-<p class="p1"><span class="Apple-converted-space">        </span>}</p>
-<p class="p1"><span class="Apple-converted-space">        </span>.result-card {</p>
-<p class="p1"><span class="Apple-converted-space">            </span>background-color: #ffffff;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>border-radius: 20px;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1), 0 5px 10px rgba(0, 0, 0, 0.04);</p>
-<p class="p1"><span class="Apple-converted-space">            </span>border: 1px solid #f0f0f0;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>overflow: hidden;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>}</p>
-<p class="p1"><span class="Apple-converted-space">        </span>.result-header {</p>
-<p class="p1"><span class="Apple-converted-space">            </span>background: linear-gradient(135deg, #a8c0ff, #3f2b96);</p>
-<p class="p1"><span class="Apple-converted-space">            </span>color: white;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>padding: 2.5rem 1.5rem;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>text-shadow: 1px 1px 3px rgba(0,0,0,0.2);</p>
-<p class="p1"><span class="Apple-converted-space">        </span>}</p>
-<p class="p1"><span class="Apple-converted-space">        </span>.custom-btn {</p>
-<p class="p1"><span class="Apple-converted-space">            </span>transition: all 0.3s ease;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>box-shadow: 0 4px 6px rgba(50, 50, 93, 0.11), 0 1px 3px rgba(0, 0, 0, 0.08);</p>
-<p class="p1"><span class="Apple-converted-space">        </span>}</p>
-<p class="p1"><span class="Apple-converted-space">        </span>.custom-btn:hover {</p>
-<p class="p1"><span class="Apple-converted-space">            </span>transform: translateY(-2px);</p>
-<p class="p1"><span class="Apple-converted-space">            </span>box-shadow: 0 7px 14px rgba(50, 50, 93, 0.1), 0 3px 6px rgba(0, 0, 0, 0.08);</p>
-<p class="p1"><span class="Apple-converted-space">        </span>}</p>
-<p class="p1"><span class="Apple-converted-space">        </span>.loader {</p>
-<p class="p1"><span class="Apple-converted-space">            </span>border: 6px solid #f3f3f3;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>border-top: 6px solid #6366f1;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>border-radius: 50%;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>width: 60px;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>height: 60px;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>animation: spin 1.5s linear infinite;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>}</p>
-<p class="p1"><span class="Apple-converted-space">        </span>@keyframes spin {</p>
-<p class="p1"><span class="Apple-converted-space">            </span>0% { transform: rotate(0deg); }</p>
-<p class="p1"><span class="Apple-converted-space">            </span>100% { transform: rotate(360deg); }</p>
-<p class="p1"><span class="Apple-converted-space">        </span>}</p>
-<p class="p1"><span class="Apple-converted-space">        </span>/* Animation for the Saju link */</p>
-<p class="p1"><span class="Apple-converted-space">        </span>@keyframes pulse {</p>
-<p class="p1"><span class="Apple-converted-space">          </span>0%, 100% {</p>
-<p class="p1"><span class="Apple-converted-space">            </span>transform: scale(1);</p>
-<p class="p1"><span class="Apple-converted-space">          </span>}</p>
-<p class="p1"><span class="Apple-converted-space">          </span>50% {</p>
-<p class="p1"><span class="Apple-converted-space">            </span>transform: scale(1.03);</p>
-<p class="p1"><span class="Apple-converted-space">          </span>}</p>
-<p class="p1"><span class="Apple-converted-space">        </span>}</p>
-<p class="p1"><span class="Apple-converted-space">        </span>.saju-link-animated {</p>
-<p class="p1"><span class="Apple-converted-space">            </span>animation: pulse 3s infinite ease-in-out;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>transition: transform 0.3s ease;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>display: inline-block; /* To apply transform */</p>
-<p class="p1"><span class="Apple-converted-space">        </span>}</p>
-<p class="p1"><span class="Apple-converted-space">        </span>.saju-link-animated:hover {</p>
-<p class="p1"><span class="Apple-converted-space">            </span>animation-play-state: paused;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>transform: scale(1.08);</p>
-<p class="p1"><span class="Apple-converted-space">        </span>}</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;/style&gt;</p>
-<p class="p1">&lt;/head&gt;</p>
-<p class="p1">&lt;body class="bg-gray-50 text-gray-800 flex items-center justify-center min-h-screen p-4"&gt;</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;div class="w-full max-w-md mx-auto"&gt;</p>
-<p class="p2"><span class="Apple-converted-space">        </span></p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;!-- 1. 시작 화면 (Start Screen) --&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;div id="start-screen" class="text-center p-6 fade-in"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;!-- Title and Language Selector Container --&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;div class="flex flex-wrap justify-center items-center gap-x-3 gap-y-2 mb-4"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                </span>&lt;h1 id="main-title" class="text-3xl font-bold text-gray-900 whitespace-nowrap"&gt;&lt;/h1&gt;</p>
-<p class="p2"><span class="Apple-converted-space">                </span></p>
-<p class="p1"><span class="Apple-converted-space">                </span>&lt;!-- Language Dropdown --&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                </span>&lt;div id="lang-switcher" class="relative"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>&lt;button id="lang-toggle-btn" class="flex items-center justify-between w-24 px-3 py-2 text-sm font-medium text-left text-gray-700 bg-white border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-indigo-500"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                        </span>&lt;span id="selected-lang" class="flex items-center gap-2"&gt;&lt;/span&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                        </span>&lt;svg class="w-5 h-5 -mr-1 text-gray-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                            </span>&lt;path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" /&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                        </span>&lt;/svg&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>&lt;/button&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>&lt;div id="lang-menu" class="absolute right-0 w-full mt-1 origin-top-right bg-white border border-gray-200 rounded-md shadow-lg hidden z-10"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                        </span>&lt;div class="py-1"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                            </span>&lt;a href="#" class="lang-option flex items-center gap-3 px-3 py-2 text-sm text-gray-700 hover:bg-gray-100" data-lang="ko"&gt;&lt;/a&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                            </span>&lt;a href="#" class="lang-option flex items-center gap-3 px-3 py-2 text-sm text-gray-700 hover:bg-gray-100" data-lang="en"&gt;&lt;/a&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                            </span>&lt;a href="#" class="lang-option flex items-center gap-3 px-3 py-2 text-sm text-gray-700 hover:bg-gray-100" data-lang="es"&gt;&lt;/a&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                        </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;/div&gt;</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;p id="main-desc" class="text-gray-600 mb-8"&gt;&lt;/p&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;button id="start-btn" class="custom-btn bg-indigo-600 text-white font-bold py-3 px-8 rounded-full text-lg hover:bg-indigo-700"&gt;&lt;/button&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;!-- 2. 질문 화면 (Question Screen) --&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;div id="question-screen" class="hidden"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;div class="w-full bg-gray-200 rounded-full h-2.5 mb-6"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                </span>&lt;div id="progress-bar" class="bg-indigo-500 h-2.5 rounded-full" style="width: 0%"&gt;&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;div id="question-container" class="bg-white p-8 rounded-xl shadow-md"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                </span>&lt;h2 id="question-text" class="text-xl font-bold mb-6 text-center"&gt;&lt;/h2&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                </span>&lt;div class="space-y-4"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>&lt;button class="question-btn custom-btn w-full bg-white border border-gray-300 text-gray-700 py-4 px-4 rounded-lg hover:bg-indigo-50 hover:border-indigo-400 text-left"&gt;&lt;/button&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>&lt;button class="question-btn custom-btn w-full bg-white border border-gray-300 text-gray-700 py-4 px-4 rounded-lg hover:bg-indigo-50 hover:border-indigo-400 text-left"&gt;&lt;/button&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</p>
-<p class="p2"><span class="Apple-converted-space">        </span></p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;!-- 3. 로딩 화면 (Loading Screen) --&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;div id="loading-screen" class="hidden text-center p-6 fade-in"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;div class="flex justify-center items-center mb-4"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                </span>&lt;div class="loader"&gt;&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;p id="loading-text" class="text-lg font-semibold text-gray-700"&gt;&lt;/p&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;!-- 4. 결과 화면 (Result Screen) --&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;div id="result-screen" class="hidden fade-in"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;div class="result-card"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                </span>&lt;div class="result-header text-center"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>&lt;p id="result-p-1" class="font-semibold text-lg opacity-90"&gt;&lt;/p&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>&lt;h2 id="mbti-type" class="text-5xl font-extrabold mt-1"&gt;MBTI&lt;/h2&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                </span>&lt;/div&gt;</p>
-<p class="p2"><span class="Apple-converted-space">                </span></p>
-<p class="p1"><span class="Apple-converted-space">                </span>&lt;div class="p-6 md:p-8"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>&lt;div id="mbti-description" class="text-center text-gray-600 mb-8 p-4 bg-indigo-50 rounded-lg"&gt;&lt;/div&gt;</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">                    </span>&lt;div class="text-center"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                        </span>&lt;p id="result-p-2" class="text-gray-500 text-sm"&gt;&lt;/p&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                        </span>&lt;h3 id="soul-name" class="text-4xl font-bold my-2 text-indigo-700"&gt;소울네임&lt;/h3&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                        </span>&lt;p id="original-name" class="text-gray-500 text-lg mb-6"&gt;&lt;/p&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>&lt;/div&gt;</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">                    </span>&lt;div class="bg-gray-100 p-5 rounded-lg"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                        </span>&lt;h4 id="reason-title" class="font-bold text-gray-800 mb-2"&gt;&lt;/h4&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                        </span>&lt;p id="reason" class="text-gray-700 leading-relaxed"&gt;&lt;/p&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                </span>&lt;/div&gt;</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">                </span>&lt;div class="p-6 bg-gray-50 border-t border-gray-200 text-center"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                     </span>&lt;button id="retry-btn" class="custom-btn bg-indigo-600 text-white font-bold py-3 px-8 rounded-full hover:bg-indigo-700 mb-4"&gt;&lt;/button&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                     </span>&lt;div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                        </span>&lt;a href="#" id="saju-link" target="_blank" rel="noopener noreferrer" class="saju-link-animated text-base font-medium text-gray-600 hover:text-indigo-600"&gt;&lt;/a&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                     </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;script&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>// --- CORE DATA (v3.0) ---</p>
-<p class="p1"><span class="Apple-converted-space">    </span>const biblicalNamesDatabase = [</p>
-<p class="p1"><span class="Apple-converted-space">        </span>{ id:1, koreanName: "이준", originalName: "솔로몬 영감", associatedMBTI: ["ISTJ", "INTP"]},</p>
-<p class="p1"><span class="Apple-converted-space">        </span>{ id:2, koreanName: "서윤", originalName: "룻 영감", associatedMBTI: ["ISFJ", "ESFJ"]},</p>
-<p class="p1"><span class="Apple-converted-space">        </span>{ id:3, koreanName: "도하", originalName: "요셉 영감", associatedMBTI: ["INFJ", "INTJ", "ENFJ"]},</p>
-<p class="p1"><span class="Apple-converted-space">        </span>{ id:4, koreanName: "시우", originalName: "바울 영감", associatedMBTI: ["INTJ", "ENTJ", "INTP"]},</p>
-<p class="p1"><span class="Apple-converted-space">        </span>{ id:5, koreanName: "은성", originalName: "베드로 영감", associatedMBTI: ["ESTP", "ISTP", "ESFP"]},</p>
-<p class="p1"><span class="Apple-converted-space">        </span>{ id:6, koreanName: "지안", originalName: "요한 영감", associatedMBTI: ["ISFP", "INFP", "INFJ"]},</p>
-<p class="p1"><span class="Apple-converted-space">        </span>{ id:7, koreanName: "예나", originalName: "엘리사벳 영감", associatedMBTI: ["INFP", "ISFJ"]},</p>
-<p class="p1"><span class="Apple-converted-space">        </span>{ id:8, koreanName: "유진", originalName: "리브가 영감", associatedMBTI: ["ENTP", "ISTP"]},</p>
-<p class="p1"><span class="Apple-converted-space">        </span>{ id:9, koreanName: "재이", originalName: "야곱 영감", associatedMBTI: ["ESTP", "ENTJ", "ENTP"]},</p>
-<p class="p1"><span class="Apple-converted-space">        </span>{ id:10, koreanName: "라온", originalName: "이삭 영감", associatedMBTI: ["ESFP", "ISFP", "ENFP"]},</p>
-<p class="p1"><span class="Apple-converted-space">        </span>{ id:11, koreanName: "하람", originalName: "다윗 영감", associatedMBTI: ["ENFP", "ESFP", "ENFJ", "ESTP"]},</p>
-<p class="p1"><span class="Apple-converted-space">        </span>{ id:12, koreanName: "건", originalName: "모세 영감", associatedMBTI: ["ESTJ", "ISTJ", "ENTJ"]},</p>
-<p class="p1"><span class="Apple-converted-space">        </span>{ id:13, koreanName: "다은", originalName: "드보라 영감", associatedMBTI: ["ESFJ", "ESTJ", "ENTJ"]},</p>
-<p class="p1"><span class="Apple-converted-space">        </span>{ id:14, koreanName: "채원", originalName: "에스더 영감", associatedMBTI: ["ENFJ", "INFJ"]},</p>
-<p class="p1"><span class="Apple-converted-space">        </span>{ id:15, koreanName: "강민", originalName: "엘리야 영감", associatedMBTI: ["ENTJ", "INTJ", "ENTP"]},</p>
-<p class="p1"><span class="Apple-converted-space">        </span>{ id:16, koreanName: "소율", originalName: "한나 영감", associatedMBTI: ["ISFJ", "INFJ", "INFP"]},</p>
-<p class="p1"><span class="Apple-converted-space">        </span>{ id:17, koreanName: "선율", originalName: "바나바 영감", associatedMBTI: ["ENFJ", "ESFJ", "ENFP", "ESFP"]},</p>
-<p class="p1"><span class="Apple-converted-space">        </span>{ id:18, koreanName: "시온", originalName: "느헤미야 영감", associatedMBTI: ["ESTJ", "ISTJ", "ISFJ"]},</p>
-<p class="p1"><span class="Apple-converted-space">        </span>{ id:19, koreanName: "유겸", originalName: "욥 영감", associatedMBTI: ["INFJ", "ISTJ", "ISFJ"]},</p>
-<p class="p1"><span class="Apple-converted-space">        </span>{ id:20, koreanName: "아인", originalName: "마리아(베다니) 영감", associatedMBTI: ["INFP", "ISFP"]},</p>
-<p class="p1"><span class="Apple-converted-space">        </span>{ id:21, koreanName: "태오", originalName: "삼손 영감", associatedMBTI: ["ESTP"]},</p>
-<p class="p1"><span class="Apple-converted-space">        </span>{ id:22, koreanName: "윤슬", originalName: "요나 영감", associatedMBTI: ["ISFP", "INFP", "ENFP"]},</p>
-<p class="p1"><span class="Apple-converted-space">        </span>{ id:23, koreanName: "지수", originalName: "마르다 영감", associatedMBTI: ["ESFJ", "ESTJ", "ESFP"]},</p>
-<p class="p1"><span class="Apple-converted-space">        </span>{ id:24, koreanName: "도윤", originalName: "기드온 영감", associatedMBTI: ["ISTP", "ISFP", "INTP"]},</p>
-<p class="p1"><span class="Apple-converted-space">        </span>{ id:25, koreanName: "새롬", originalName: "마태 영감", associatedMBTI: ["ENTP", "ENFP"]},</p>
-<p class="p1"><span class="Apple-converted-space">        </span>{ id:26, koreanName: "결", originalName: "다니엘 영감", associatedMBTI: ["INTJ", "ISTJ", "ISTP"]}</p>
-<p class="p1"><span class="Apple-converted-space">    </span>];</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">    </span>// --- LANGUAGE DATA STORE (v3.0 - 24 Questions) ---</p>
-<p class="p1"><span class="Apple-converted-space">    </span>const langData = {</p>
-<p class="p1"><span class="Apple-converted-space">        </span>ko: {</p>
-<p class="p1"><span class="Apple-converted-space">            </span>name: 'Korean', flag: '🇰🇷', code: 'KR',</p>
-<p class="p1"><span class="Apple-converted-space">            </span>main_title: "나의 '성경적 소울네임' 찾기", main_desc: "MBTI와 성경적 영감으로 탄생한&lt;br&gt;당신만의 특별한 한국 이름을 찾아보세요.",</p>
-<p class="p1"><span class="Apple-converted-space">            </span>start_btn: "이름 찾기", loading_text: "이름을 만들고 있어요...",</p>
-<p class="p1"><span class="Apple-converted-space">            </span>result_p_1: "당신의 성격 유형은", result_p_2: "당신을 위한 소울네임은...",</p>
-<p class="p1"><span class="Apple-converted-space">            </span>reason_title: "이름에 담긴 의미", retry_btn: "다시하기", saju_link: "사주풀이를 통한 내 한국 이름 찾아보기",</p>
-<p class="p1"><span class="Apple-converted-space">            </span>questions: [</p>
-<p class="p1"><span class="Apple-converted-space">                 </span>{ q: "휴식을 취할 때 나는...", a: [{ text: "사람들과 어울리며 에너지를 얻는다.", type: "E" }, { text: "혼자만의 시간을 보내며 재충전한다.", type: "I" }] },</p>
-<p class="p1"><span class="Apple-converted-space">                 </span>{ q: "문제를 볼 때 나는...", a: [{ text: "현실적인 사실과 경험을 더 신뢰한다.", type: "S" }, { text: "숨겨진 의미와 미래의 가능성을 본다.", type: "N" }] },</p>
-<p class="p1"><span class="Apple-converted-space">                 </span>{ q: "결정할 때 나는...", a: [{ text: "무엇이 공정하고 논리적인지 생각한다.", type: "T" }, { text: "다른 사람에게 미칠 영향을 먼저 고려한다.", type: "F" }] },</p>
-<p class="p1"><span class="Apple-converted-space">                 </span>{ q: "약속을 정할 때 나는...", a: [{ text: "미리 계획을 세우고 지키는 것이 편하다.", type: "J" }, { text: "상황에 따라 유연하게 대처하는 것을 즐긴다.", type: "P" }] },</p>
-<p class="p1"><span class="Apple-converted-space">                 </span>{ q: "새로운 환경에서 나는...", a: [{ text: "먼저 다가가고 대화를 시작하는 편이다.", type: "E" }, { text: "차분히 관찰하며 서서히 적응하는 편이다.", type: "I" }] },</p>
-<p class="p1"><span class="Apple-converted-space">                 </span>{ q: "나는 보통...", a: [{ text: "구체적이고 실용적인 정보에 더 끌린다.", type: "S" }, { text: "추상적이고 철학적인 아이디어를 즐긴다.", type: "N" }] },</p>
-<p class="p1"><span class="Apple-converted-space">                 </span>{ q: "힘든 친구에게 나는...", a: [{ text: "객관적인 해결책을 함께 찾아주려 한다.", type: "T" }, { text: "따뜻하게 공감하며 마음을 위로해준다.", type: "F" }] },</p>
-<p class="p1"><span class="Apple-converted-space">                 </span>{ q: "나의 생활 공간은...", a: [{ text: "깔끔하게 정리정돈된 상태를 유지한다.", type: "J" }, { text: "자유롭고 편안한 분위기를 선호한다.", type: "P" }] },</p>
-<p class="p1"><span class="Apple-converted-space">                 </span>{ q: "나는 나를 표현할 때...", a: [{ text: "폭넓은 경험과 활동으로 보여준다.", type: "E" }, { text: "깊이 있는 생각과 가치관으로 보여준다.", type: "I" }] },</p>
-<p class="p1"><span class="Apple-converted-space">                 </span>{ q: "일을 처리하는 방식은...", a: [{ text: "전통적이고 검증된 방법을 선호한다.", type: "S" }, { text: "새롭고 혁신적인 방법을 시도하는 편이다.", type: "N" }] },</p>
-<p class="p1"><span class="Apple-converted-space">                 </span>{ q: "나는 비판을 할 때...", a: [{ text: "진실과 사실에 근거하여 명확하게 말한다.", type: "T" }, { text: "상대방의 감정을 생각해 조심스럽게 표현한다.", type: "F" }] },</p>
-<p class="p1"><span class="Apple-converted-space">                 </span>{ q: "목표를 향해 나아갈 때...", a: [{ text: "체계적으로 단계를 설정하고 실행한다.", type: "J" }, { text: "과정을 즐기며 새로운 기회를 탐색한다.", type: "P" }] },</p>
-<p class="p1"><span class="Apple-converted-space">                 </span>{ q: "대규모 모임에 가면...", a: [{ text: "많은 사람들과 두루 어울리는 편이다.", type: "E" }, { text: "마음이 맞는 소수와 깊게 이야기하는 편이다.", type: "I" }] },</p>
-<p class="p1"><span class="Apple-converted-space">                 </span>{ q: "설명을 들을 때 더 편한 방식은...", a: [{ text: "순서대로, 구체적인 예시를 들어주는 것.", type: "S" }, { text: "전체적인 개념이나 비유를 통해 설명하는 것.", type: "N" }] },</p>
-<p class="p1"><span class="Apple-converted-space">                 </span>{ q: "갈등이 생겼을 때 우선적으로...", a: [{ text: "옳고 그름을 명확히 하는 것이 중요하다고 생각한다.", type: "T" }, { text: "모두의 감정이 상하지 않고 화합하는 것이 중요하다고 생각한다.", type: "F" }] },</p>
-<p class="p1"><span class="Apple-converted-space">                 </span>{ q: "갑자기 여가 시간이 생기면...", a: [{ text: "정해진 계획 없이 즉흥적으로 행동하는 편이다.", type: "P" }, { text: "남은 시간 동안 무엇을 할지 빠르게 계획한다.", type: "J" }] },</p>
-<p class="p1"><span class="Apple-converted-space">                 </span>{ q: "에너지가 떨어졌다고 느낄 때...", a: [{ text: "사람들을 만나서 활력을 얻고 싶다.", type: "E" }, { text: "완전히 혼자 있으면서 충전하고 싶다.", type: "I" }] },</p>
-<p class="p1"><span class="Apple-converted-space">                 </span>{ q: "새로운 기기를 샀을 때...", a: [{ text: "설명서를 꼼꼼히 읽고 순서대로 따른다.", type: "S" }, { text: "일단 눌러보면서 스스로 기능을 터득한다.", type: "N" }] },</p>
-<p class="p1"><span class="Apple-converted-space">                 </span>{ q: "누군가 내 의견에 반대하면...", a: [{ text: "감정보다 논리로 내 주장을 뒷받침하려 한다.", type: "T" }, { text: "분위기가 껄끄러워질까 봐 걱정부터 된다.", type: "F" }] },</p>
-<p class="p1"><span class="Apple-converted-space">                 </span>{ q: "여행 가방을 쌀 때 나는...", a: [{ text: "필요한 물건 목록을 만들어 꼼꼼히 챙긴다.", type: "J" }, { text: "필수적인 것들만 대강 챙기고 나머지는 현지에서 해결한다.", type: "P" }] },</p>
-<p class="p1"><span class="Apple-converted-space">                 </span>{ q: "나에게 더 익숙한 표현은...", a: [{ text: "말보다는 글이 더 편하다.", type: "I" }, { text: "글보다는 말이 더 편하다.", type: "E" }] },</p>
-<p class="p1"><span class="Apple-converted-space">                 </span>{ q: "나는 어떤 사람이라는 말을 더 자주 듣는가?", a: [{ text: "현실 감각이 뛰어나다.", type: "S" }, { text: "상상력이 풍부하다.", type: "N" }] },</p>
-<p class="p1"><span class="Apple-converted-space">                 </span>{ q: "더 기분 나쁜 상황은...", a: [{ text: "나의 능력을 인정받지 못하는 상황.", type: "T" }, { text: "나의 노력을 이해받지 못하는 상황.", type: "F" }] },</p>
-<p class="p1"><span class="Apple-converted-space">                 </span>{ q: "나의 삶은...", a: [{ text: "예측 가능하고 안정적인 것이 더 좋다.", type: "J" }, { text: "새로운 자극과 변화가 있는 것이 더 좋다.", type: "P" }] }</p>
-<p class="p1"><span class="Apple-converted-space">            </span>],</p>
-<p class="p1"><span class="Apple-converted-space">            </span>mbtiDescriptions: {</p>
-<p class="p1"><span class="Apple-converted-space">                </span>ISTJ: "세상의 소금형 - 책임감이 강하고 현실적인 당신은 약속을 반드시 지키는 신뢰의 아이콘입니다.", ISFJ: "임금 뒷편의 권력형 - 따뜻한 마음으로 주변을 챙기며, 헌신적으로 공동체를 지키는 수호자입니다.", INFJ: "예언자형 - 깊은 통찰력으로 사람과 세상을 이해하며, 더 나은 미래를 향한 신념을 가지고 나아갑니다.", INTJ: "과학자형 - 뛰어난 전략과 비전으로 세상을 분석하고, 모든 일에 완벽을 추구하는 독립적인 사상가입니다.", ISTP: "백과사전형 - 논리적이고 실용적으로 문제를 해결하며, 위기 상황에서 뛰어난 적응력을 보여주는 만능 재주꾼입니다.", ISFP: "성인군자형 - 따뜻한 마음을 가진 겸손한 예술가로, 말보다는 행동으로 자신의 가치를 증명합니다.", INFP: "잔다르크형 - 이상적인 세상을 꿈꾸는 열정적인 중재자로, 자신의 신념과 가치를 무엇보다 소중히 여깁니다.", INTP: "아이디어 뱅크형 - 끊임없는 호기심으로 세상을 탐구하며, 논리와 분석으로 새로운 가능성을 찾아내는 발명가입니다.", ESTP: "수완좋은 활동가형 - 넘치는 에너지와 빠른 상황 판단으로, 인생을 즐길 줄 아는 현실적인 모험가입니다.", ESFP: "사교적인 유형 - 타고난 낙천성과 사교성으로 주변에 즐거움을 선사하는 자유로운 영혼의 소유자입니다.", ENFP: "스파크형 - 뜨거운 열정과 풍부한 상상력으로 새로운 가능성에 도전하며, 사람들에게 긍정적인 영감을 줍니다.", ENTP: "발명가형 - 재치있는 입담과 기발한 생각으로 세상을 탐험하며, 논쟁을 통해 지적인 자극을 즐기는 변론가입니다.", ESTJ: "사업가형 - 타고난 리더십과 체계적인 관리 능력으로, 조직을 현실적으로 이끌어가는 뛰어난 경영자입니다.", ESFJ: "친선도모형 - 따뜻한 관심과 현실적인 조언으로 사람들을 돕고, 공동체의 화합을 중요시하는 사교적인 외교관입니다.", ENFJ: "언변능숙형 - 카리스마와 이상으로 사람들을 이끌며, 공동체의 성장을 위해 헌신하는 정의로운 사회운동가입니다.", ENTJ: "지도자형 - 대담한 비전과 강력한 의지로 목표를 성취하며, 사람들을 이끌어 위대한 변화를 만들어내는 통솔자입니다."</p>
-<p class="p1"><span class="Apple-converted-space">            </span>},</p>
-<p class="p1"><span class="Apple-converted-space">            </span>biblicalNames: [</p>
-<p class="p1"><span class="Apple-converted-space">                </span>{ id:1, reason: "왕국의 기틀을 다진 솔로몬의 지혜와 ISTJ의 철두철미함이 '바를 이(理), 준할 준(準)' 자에 담겨, 원칙과 기준으로 세상을 바로 세우는 리더의 모습을 떠올리게 합니다." },</p>
-<p class="p1"><span class="Apple-converted-space">                </span>{ id:2, reason: "낯선 땅에서 헌신적인 사랑을 보여준 룻처럼, '상서로울 서(瑞), 진실로 윤(允)' 자는 주변에 따뜻한 믿음과 온기를 전하는 ISFJ의 성품을 표현합니다." },</p>
-<p class="p1"><span class="Apple-converted-space">                </span>{ id:3, reason: "큰 꿈을 통해 민족을 구원한 요셉의 통찰력처럼, '아름다운 강'을 뜻하는 '도하(渡河)'는 사람들을 더 나은 미래로 이끄는 INFJ/INTJ/ENFJ의 모습을 상징합니다." },</p>
-<p class="p1"><span class="Apple-converted-space">                </span>{ id:4, reason: "세상을 바꾼 바울의 비전처럼 '때 시(時), 비 우(雨)'를 쓰는 '시우'는, INTJ/ENTJ/INTP가 가진 지혜가 가장 필요한 순간에 단비처럼 내리는 것을 의미합니다." },</p>
-<p class="p1"><span class="Apple-converted-space">                </span>{ id:5, reason: "반석 같은 믿음의 베드로처럼, '은혜 은(恩), 별 성(星)'을 쓰는 '은성'은 어둠 속에서도 길을 밝히는 ESTP/ISTP/ESFP의 긍정적인 영향력을 의미합니다." },</p>
-<p class="p1"><span class="Apple-converted-space">                </span>{ id:6, reason: "'사랑의 사도' 요한처럼 '지혜 지(智), 편안할 안(安)'을 쓰는 '지안'은, 깊은 사랑에서 비롯된 지혜로 공동체에 평안을 가져오는 ISFP/INFP/INFJ의 특징을 담았습니다." },</p>
-<p class="p1"><span class="Apple-converted-space">                </span>{ id:7, reason: "오랜 기다림 끝에 축복을 맞이한 엘리사벳처럼, '재주 예(才), 아름다울 나(娜)'를 쓰는 '예나'는 INFP/ISFJ의 따뜻한 믿음이 아름다운 재능으로 피어남을 뜻합니다." },</p>
-<p class="p1"><span class="Apple-converted-space">                </span>{ id:8, reason: "지혜로운 선택으로 미래를 연 리브가처럼, '참 진(眞)'을 품은 '유진'은 ENTP/ISTP의 실용적인 지혜가 세상을 이롭게 하는 '진짜' 가치를 만들어냄을 상징합니다." },</p>
-<p class="p1"><span class="Apple-converted-space">                </span>{ id:9, reason: "수많은 시련을 넘어 축복을 쟁취한 야곱처럼, '재주 재(才), 기쁠 이(怡)' 자를 쓰는 '재이'는 ESTP/ENTJ/ENTP의 재능과 긍정적인 태도가 결국 기쁨을 가져옴을 의미합니다." },</p>
-<p class="p1"><span class="Apple-converted-space">                </span>{ id:10, reason: "'즐거움'을 뜻하는 순우리말 '라온'은, '웃음'이란 뜻의 이삭처럼 주변에 기쁨과 긍정의 에너지를 퍼뜨리는 ESFP/ISFP/ENFP의 모습을 그대로 보여줍니다." },</p>
-<p class="p1"><span class="Apple-converted-space">                </span>{ id:11, reason: "하나님이 주신 소중한 사람이라는 뜻의 '하람'은, 다윗의 풍부한 감성과 예술가적 영감, 그리고 ENFP/ESFP/ENFJ의 열정이 주변에 미치는 선한 영향력을 상징합니다." },</p>
-<p class="p1"><span class="Apple-converted-space">                </span>{ id:12, reason: "위대한 지도자 모세처럼, '세울 건(建)' 자를 쓰는 이름 '건'은 공동체의 법과 질서를 세워 모두를 이끄는 ESTJ/ISTJ/ENTJ의 굳건한 리더십을 상징합니다." },</p>
-<p class="p1"><span class="Apple-converted-space">                </span>{ id:13, reason: "지혜로운 여선지자 드보라처럼, '많을 다(多), 은혜 은(恩)' 자를 쓰는 '다은'은 ESFJ/ESTJ/ENTJ의 따뜻한 리더십이 공동체에 많은 은혜를 베푸는 모습을 의미합니다." },</p>
-<p class="p1"><span class="Apple-converted-space">                </span>{ id:14, reason: "민족을 구원한 에스더의 용기처럼, '채울 채(採), 으뜸 원(元)'을 쓰는 '채원'은 ENFJ/INFJ의 빛나는 리더십이 세상을 아름다움으로 채우고 최고로 이끄는 모습을 담았습니다." },</p>
-<p class="p1"><span class="Apple-converted-space">                </span>{ id:15, reason: "불의에 맞선 선지자 엘리야처럼, '굳셀 강(强), 민첩할 민(敏)'을 쓰는 '강민'은 어떠한 상황에서도 신념을 지키는 ENTJ/INTJ/ENTP의 강인함과 지혜를 보여줍니다." },</p>
-<p class="p1"><span class="Apple-converted-space">                </span>{ id:16, reason: "간절한 기도로 응답받은 한나처럼, '고울 소(韶), 법 율(律)'을 쓰는 '소율'은 ISFJ/INFJ/INFP의 진실된 마음이 만들어내는 아름다운 삶의 질서를 의미합니다." },</p>
-<p class="p1"><span class="Apple-converted-space">                </span>{ id:17, reason: "'위로의 아들' 바나바처럼 '착할 선(善), 가락 율(律)'을 쓰는 '선율'은, ENFJ/ESFJ/ENFP의 따뜻한 마음이 세상을 위로하는 아름다운 선율이 됨을 의미합니다." },</p>
-<p class="p1"><span class="Apple-converted-space">                </span>{ id:18, reason: "무너진 성벽을 재건한 느헤미야처럼, '보일 시(示), 따뜻할 온(溫)' 자를 쓰는 '시온'은 ESTJ/ISTJ/ISFJ의 헌신적인 리더십이 공동체에 따뜻한 비전을 보여줌을 뜻합니다." },</p>
-<p class="p1"><span class="Apple-converted-space">                </span>{ id:19, reason: "극한의 고난을 이겨낸 욥처럼, '있을 유(有), 겸손할 겸(謙)'을 쓰는 '유겸'은 모든 것을 가졌을 때에도 겸손함을 잃지 않는 INFJ/ISTJ/ISFJ의 깊은 성품을 담았습니다." },</p>
-<p class="p1"><span class="Apple-converted-space">                </span>{ id:20, reason: "진리를 사모한 베다니의 마리아처럼, '아름다운 보석'을 뜻하는 '아인(AIN)'은 세상의 소리보다 내면의 가치를 추구하는 INFP/ISFP의 순수한 영혼을 상징합니다." },</p>
-<p class="p1"><span class="Apple-converted-space">                </span>{ id:21, reason: "초인적인 힘의 삼손처럼, '클 태(太), 높을 고(高)'를 쓰는 '태오'는 ESTP의 대담하고 에너지 넘치는 기상이 세상을 압도하는 모습을 보여줍니다." },</p>
-<p class="p1"><span class="Apple-converted-space">                </span>{ id:22, reason: "햇빛이나 달빛에 비치어 반짝이는 잔물결을 뜻하는 '윤슬'은, 방황 끝에 큰 깨달음을 얻은 요나처럼 ISFP/INFP/ENFP의 감성적인 영혼이 빛을 발하는 순간을 의미합니다." },</p>
-<p class="p1"><span class="Apple-converted-space">                </span>{ id:23, reason: "현실적인 지혜로 헌신한 마르다처럼, '뜻 지(志), 빼어날 수(秀)'를 쓰는 '지수'는 ESFJ/ESTJ/ESFP의 따뜻한 마음과 현실적인 지혜가 조화를 이루는 모습을 담았습니다." },</p>
-<p class="p1"><span class="Apple-converted-space">                </span>{ id:24, reason: "소심한 용사에서 위대한 지도자가 된 기드온처럼, '길 도(道), 빛날 윤(潤)'을 쓰는 '도윤'은 ISTP/ISFP/INTP가 자신만의 길을 걸으며 세상을 밝게 비추는 것을 의미합니다." },</p>
-<p class="p1"><span class="Apple-converted-space">                </span>{ id:25, reason: "낡은 것을 버리고 새로운 삶을 택한 마태처럼, 순우리말 '새롬'은 ENTP/ENFP가 추구하는 진리의 새로움과 긍정적인 변화를 상징합니다." },</p>
-<p class="p1"><span class="Apple-converted-space">                </span>{ id:26, reason: "굳건한 믿음의 다니엘처럼, '바를 결(潔)' 자를 쓰는 '결'은 어떤 상황에서도 원칙을 지키는 INTJ/ISTJ/ISTP의 깨끗하고 단단한 의지를 의미합니다." }</p>
-<p class="p1"><span class="Apple-converted-space">            </span>]</p>
-<p class="p1"><span class="Apple-converted-space">        </span>},</p>
-<p class="p1"><span class="Apple-converted-space">        </span>en: {</p>
-<p class="p1"><span class="Apple-converted-space">            </span>name: 'English', flag: '🇺🇸', code: 'EN',</p>
-<p class="p1"><span class="Apple-converted-space">            </span>main_title: "Find Your Biblical Soul Name", main_desc: "Discover a special Korean name for you,&lt;br&gt;born from MBTI and biblical inspiration.",</p>
-<p class="p1"><span class="Apple-converted-space">            </span>start_btn: "Find My Name", loading_text: "Creating your name...",</p>
-<p class="p1"><span class="Apple-converted-space">            </span>result_p_1: "Your personality type is", result_p_2: "Your soul name is...",</p>
-<p class="p1"><span class="Apple-converted-space">            </span>reason_title: "The Meaning Behind the Name", retry_btn: "Retry", saju_link: "Find my Korean name via Saju analysis",</p>
-<p class="p1"><span class="Apple-converted-space">            </span>questions: [</p>
-<p class="p1"><span class="Apple-converted-space">                </span>{ q: "When I relax, I...", a: [{ text: "Get energy from being around people.", type: "E" }, { text: "Recharge by spending time alone.", type: "I" }] },</p>
-<p class="p1"><span class="Apple-converted-space">                </span>{ q: "When looking at a problem, I...", a: [{ text: "Trust realistic facts and experience more.", type: "S" }, { text: "See hidden meanings and future possibilities.", type: "N" }] },</p>
-<p class="p1"><span class="Apple-converted-space">                </span>{ q: "When making a decision, I...", a: [{ text: "Think about what is fair and logical.", type: "T" }, { text: "First consider the impact on other people.", type: "F" }] },</p>
-<p class="p1"><span class="Apple-converted-space">                </span>{ q: "When making an appointment, I...", a: [{ text: "Feel comfortable planning ahead and sticking to it.", type: "J" }, { text: "Enjoy responding flexibly to situations.", type: "P" }] },</p>
-<p class="p1"><span class="Apple-converted-space">                </span>{ q: "In a new environment, I...", a: [{ text: "Tend to approach others first and start conversations.", type: "E" }, { text: "Tend to adapt slowly by observing calmly.", type: "I" }] },</p>
-<p class="p1"><span class="Apple-converted-space">                </span>{ q: "I'm usually...", a: [{ text: "More drawn to concrete and practical information.", type: "S" }, { text: "Enjoy abstract and philosophical ideas.", type: "N" }] },</p>
-<p class="p1"><span class="Apple-converted-space">                </span>{ q: "To a friend who is struggling, I...", a: [{ text: "Try to find an objective solution together.", type: "T" }, { text: "Comfort them warmly and empathize with their feelings.", type: "F" }] },</p>
-<p class="p1"><span class="Apple-converted-space">                </span>{ q: "My living space is...", a: [{ text: "Maintained in a neat and tidy state.", type: "J" }, { text: "Prefer a free and comfortable atmosphere.", type: "P" }] },</p>
-<p class="p1"><span class="Apple-converted-space">                </span>{ q: "When I express myself, I...", a: [{ text: "Show it through a wide range of experiences and activities.", type: "E" }, { text: "Show it through deep thoughts and values.", type: "I" }] },</p>
-<p class="p1"><span class="Apple-converted-space">                </span>{ q: "My way of handling work is...", a: [{ text: "I prefer traditional and proven methods.", type: "S" }, { text: "I tend to try new and innovative methods.", type: "N" }] },</p>
-<p class="p1"><span class="Apple-converted-space">                </span>{ q: "When I criticize, I...", a: [{ text: "Speak clearly based on truth and facts.", type: "T" }, { text: "Express myself carefully, considering the other person's feelings.", type: "F" }] },</p>
-<p class="p1"><span class="Apple-converted-space">                </span>{ q: "When moving towards a goal...", a: [{ text: "I systematically set up and execute steps.", type: "J" }, { text: "I enjoy the process and explore new opportunities.", type: "P" }] },</p>
-<p class="p1"><span class="Apple-converted-space">                </span>{ q: "At a large gathering...", a: [{ text: "I tend to mingle with many different people.", type: "E" }, { text: "I prefer to have a deep conversation with a small group of people I connect with.", type: "I" }] },</p>
-<p class="p1"><span class="Apple-converted-space">                </span>{ q: "When listening to an explanation, I prefer...", a: [{ text: "A step-by-step explanation with concrete examples.", type: "S" }, { text: "An explanation through overall concepts or metaphors.", type: "N" }] },</p>
-<p class="p1"><span class="Apple-converted-space">                </span>{ q: "When a conflict arises, I prioritize...", a: [{ text: "Clarifying what is right and wrong.", type: "T" }, { text: "Ensuring everyone's feelings are considered and maintaining harmony.", type: "F" }] },</p>
-<p class="p1"><span class="Apple-converted-space">                </span>{ q: "If I suddenly have free time...", a: [{ text: "I act spontaneously without a set plan.", type: "P" }, { text: "I quickly make a plan for what to do with the time.", type: "J" }] },</p>
-<p class="p1"><span class="Apple-converted-space">                </span>{ q: "When I feel my energy is low...", a: [{ text: "I want to meet people to get energized.", type: "E" }, { text: "I want to be completely alone to recharge.", type: "I" }] },</p>
-<p class="p1"><span class="Apple-converted-space">                </span>{ q: "When I get a new device...", a: [{ text: "I read the manual carefully and follow the steps.", type: "S" }, { text: "I learn its functions by pressing buttons and figuring it out myself.", type: "N" }] },</p>
-<p class="p1"><span class="Apple-converted-space">                </span>{ q: "If someone disagrees with my opinion...", a: [{ text: "I try to support my argument with logic rather than emotion.", type: "T" }, { text: "I worry that the atmosphere might become awkward.", type: "F" }] },</p>
-<p class="p1"><span class="Apple-converted-space">                </span>{ q: "When packing for a trip, I...", a: [{ text: "Make a list of necessary items and pack meticulously.", type: "J" }, { text: "Pack the essentials roughly and handle the rest locally.", type: "P" }] },</p>
-<p class="p1"><span class="Apple-converted-space">                </span>{ q: "Which expression is more comfortable for me?", a: [{ text: "Writing is more comfortable than speaking.", type: "I" }, { text: "Speaking is more comfortable than writing.", type: "E" }] },</p>
-<p class="p1"><span class="Apple-converted-space">                </span>{ q: "What am I more often told I am?", a: [{ text: "Down-to-earth and practical.", type: "S" }, { text: "Imaginative and creative.", type: "N" }] },</p>
-<p class="p1"><span class="Apple-converted-space">                </span>{ q: "What situation is more upsetting?", a: [{ text: "When my abilities are not recognized.", type: "T" }, { text: "When my efforts are not understood.", type: "F" }] },</p>
-<p class="p1"><span class="Apple-converted-space">                </span>{ q: "I prefer my life to be...", a: [{ text: "Predictable and stable.", type: "J" }, { text: "Full of new stimuli and changes.", type: "P" }] }</p>
-<p class="p1"><span class="Apple-converted-space">            </span>],</p>
-<p class="p1"><span class="Apple-converted-space">            </span>mbtiDescriptions: {</p>
-<p class="p1"><span class="Apple-converted-space">                </span>ISTJ: "The Salt of the Earth - Responsible and realistic, you are an icon of trust who always keeps promises.", ISFJ: "The Power Behind the Throne - A guardian who takes care of others with a warm heart and devotedly protects the community.", INFJ: "The Prophet - Understands people and the world with deep insight, moving forward with a belief in a better future.", INTJ: "The Scientist - An independent thinker who analyzes the world with outstanding strategy and vision, pursuing perfection in everything.", ISTP: "The Walking Encyclopedia - A versatile handyman who solves problems logically and practically, showing excellent adaptability in crises.", ISFP: "The Humble Saint - A humble artist with a warm heart who proves their worth through actions rather than words.", INFP: "The Joan of Arc - A passionate mediator who dreams of an ideal world and values their beliefs and values above all.", INTP: "The Idea Bank - An inventor who explores the world with endless curiosity and finds new possibilities through logic and analysis.", ESTP: "The Resourceful Activist - A realistic adventurer who knows how to enjoy life with overflowing energy and quick judgment.", ESFP: "The Socialite - A free spirit who brings joy to those around them with their innate optimism and sociability.", ENFP: "The Spark - Challenges new possibilities with fiery passion and rich imagination, giving positive inspiration to people.", ENTP: "The Debater - Explores the world with witty talk and brilliant ideas, enjoying intellectual stimulation through debate.", ESTJ: "The Entrepreneur - An excellent manager who leads organizations realistically with natural leadership and systematic management skills.", ESFJ: "The Goodwill Ambassador - A sociable diplomat who helps people with warm interest and practical advice, valuing community harmony.", ENFJ: "The Eloquent Speaker - A righteous social activist who leads people with charisma and ideals, dedicating themselves to community growth.", ENTJ: "The Leader - A commander who achieves goals with bold vision and strong will, leading people to create great change."</p>
-<p class="p1"><span class="Apple-converted-space">            </span>},</p>
-<p class="p1"><span class="Apple-converted-space">            </span>biblicalNames: [</p>
-<p class="p1"><span class="Apple-converted-space">                </span>{ id:1, reason: "Combining characters for 'reason' (理) and 'standard' (準), 'Lee-jun' reflects Solomon's wisdom and the ISTJ's meticulousness, evoking a leader who builds a world on principles." },</p>
-<p class="p1"><span class="Apple-converted-space">                </span>{ id:2, reason: "Like Ruth who showed devotion in a foreign land, 'Seo-yoon' uses characters for 'auspicious' (瑞) and 'sincere' (允) to express the ISFJ's character of spreading warm faith." },</p>
-<p class="p1"><span class="Apple-converted-space">                </span>{ id:3, reason: "Meaning 'beautiful river,' 'Do-ha' (渡河) symbolizes the INFJ/INTJ/ENFJ's ability to lead people to a better future, like Joseph who saved a nation through his great dream." },</p>
-<p class="p1"><span class="Apple-converted-space">                </span>{ id:4, reason: "Using characters for 'time' (時) and 'rain' (雨), 'Si-woo' signifies the wisdom of the INTJ/ENTJ/INTP arriving like timely rain in crucial moments, reflecting Paul's world-changing vision." },</p>
-<p class="p1"><span class="Apple-converted-space">                </span>{ id:5, reason: "With characters for 'grace' (恩) and 'star' (星), 'Eun-seong' represents the positive influence of the ESTP/ISTP/ESFP, shining a guiding light in darkness, like Peter, the rock of faith." },</p>
-<p class="p1"><span class="Apple-converted-space">                </span>{ id:6, reason: "'Ji-an' uses 'wisdom' (智) and 'peace' (安), capturing the ISFP/INFP/INFJ trait of bringing peace to a community through wisdom born of deep love, like John the Apostle of Love." },</p>
-<p class="p1"><span class="Apple-converted-space">                </span>{ id:7, reason: "Like Elizabeth who received a blessing after a long wait, 'Ye-na,' using 'talent' (才) and 'beauty' (娜), signifies the beautiful talents that blossom from an INFP/ISFJ's warm faith." },</p>
-<p class="p1"><span class="Apple-converted-space">                </span>{ id:8, reason: "Containing the character for 'truth' (眞), 'Yu-jin' symbolizes how the practical wisdom of the ENTP/ISTP creates 'true' value that benefits the world, like Rebecca's wise choices." },</p>
-<p class="p1"><span class="Apple-converted-space">                </span>{ id:9, reason: "'Jae-yi' uses 'talent' (才) and 'joy' (怡) to show how the talent and positivity of the ESTP/ENTJ/ENTP ultimately bring joy, like Jacob who overcame trials to earn his blessing." },</p>
-<p class="p1"><span class="Apple-converted-space">                </span>{ id:10, reason: "'Laon,' a native Korean word for 'joyful,' perfectly reflects the ESFP/ISFP/ENFP's nature of spreading happiness, just like Isaac, whose name means 'laughter'." },</p>
-<p class="p1"><span class="Apple-converted-space">                </span>{ id:11, reason: "'Ha-ram,' meaning 'a precious person from God,' symbolizes the positive influence of the ENFP/ESFP/ENFJ's passion, akin to David's rich emotions and artistic inspiration." },</p>
-<p class="p1"><span class="Apple-converted-space">                </span>{ id:12, reason: "Like the great leader Moses, the name 'Geon,' using the character 'to build' (建), symbolizes the strong leadership of the ESTJ/ISTJ/ENTJ who establishes order for all." },</p>
-<p class="p1"><span class="Apple-converted-space">                </span>{ id:13, reason: "Using 'many' (多) and 'grace' (恩), 'Da-eun' signifies how the warm leadership of the ESFJ/ESTJ/ENTJ bestows great grace upon their community, like the prophetess Deborah." },</p>
-<p class="p1"><span class="Apple-converted-space">                </span>{ id:14, reason: "'Chae-won,' using 'to fill' (採) and 'first' (元), captures how the brilliant leadership of the ENFJ/INFJ fills the world with beauty, reflecting Esther's courage to save her people." },</p>
-<p class="p1"><span class="Apple-converted-space">                </span>{ id:15, reason: "Like Elijah who fought injustice, 'Kang-min,' using 'strong' (强) and 'agile' (敏), shows the strength and wisdom of the ENTJ/INTJ/ENTP in upholding beliefs." },</p>
-<p class="p1"><span class="Apple-converted-space">                </span>{ id:16, reason: "Using 'beautiful' (韶) and 'law' (律), 'So-yul' represents the beautiful order of life created by the sincere heart of the ISFJ/INFJ/INFP, like Hannah whose prayers were answered." },</p>
-<p class="p1"><span class="Apple-converted-space">                </span>{ id:17, reason: "Like Barnabas, the 'Son of Encouragement,' 'Seon-yul' ('good' 善, 'melody' 律) means the warm heart of the ENFJ/ESFJ/ENFP becomes a beautiful melody that comforts the world." },</p>
-<p class="p1"><span class="Apple-converted-space">                </span>{ id:18, reason: "Using 'to show' (示) and 'warm' (溫), 'Si-on' signifies how the dedicated leadership of the ESTJ/ISTJ/ISFJ presents a warm vision to the community, like Nehemiah who rebuilt the walls." },</p>
-<p class="p1"><span class="Apple-converted-space">                </span>{ id:19, reason: "Like Job who overcame extreme suffering, 'Yu-gyeom,' using 'to possess' (有) and 'humble' (謙), contains the deep character of the INFJ/ISTJ/ISFJ who remains humble even when having all." },</p>
-<p class="p1"><span class="Apple-converted-space">                </span>{ id:20, reason: "'Ain,' meaning 'beautiful gem,' symbolizes the pure soul of the INFP/ISFP who seeks inner value over worldly noise, like Mary of Bethany who cherished the truth." },</p>
-<p class="p1"><span class="Apple-converted-space">                </span>{ id:21, reason: "Like the superhumanly strong Samson, 'Tae-o,' using 'great' (太) and 'high' (高), shows the bold and energetic spirit of the ESTP overwhelming the world." },</p>
-<p class="p1"><span class="Apple-converted-space">                </span>{ id:22, reason: "'Yoon-seul,' the glittering of ripples in the sun or moonlight, signifies the moment an ISFP/INFP/ENFP's emotional soul shines, like Jonah who found enlightenment after wandering." },</p>
-<p class="p1"><span class="Apple-converted-space">                </span>{ id:23, reason: "Using 'will' (志) and 'outstanding' (秀), 'Ji-su' captures the harmony of a warm heart and practical wisdom in the ESFJ/ESTJ/ESFP, like Martha who served with practical devotion." },</p>
-<p class="p1"><span class="Apple-converted-space">                </span>{ id:24, reason: "Like Gideon, who went from a timid man to a great leader, 'Do-yoon' ('path' 道, 'to shine' 潤) means the ISTP/ISFP/INTP brightly illuminates the world by walking their own path." },</p>
-<p class="p1"><span class="Apple-converted-space">                </span>{ id:25, reason: "'Sae-rom,' a native Korean word for 'newness,' symbolizes the novelty and positive change pursued by the ENTP/ENFP, like Matthew who chose a new life." },</p>
-<p class="p1"><span class="Apple-converted-space">                </span>{ id:26, reason: "Like the steadfast Daniel, the name 'Gyeol,' using the character 'pure' (潔), signifies the clean and strong will of the INTJ/ISTJ/ISTP who adheres to principles in any situation." }</p>
-<p class="p1"><span class="Apple-converted-space">            </span>]</p>
-<p class="p1"><span class="Apple-converted-space">        </span>},</p>
-<p class="p1"><span class="Apple-converted-space">        </span>es: {</p>
-<p class="p1"><span class="Apple-converted-space">            </span>name: 'Spanish', flag: '🇪🇸', code: 'ES',</p>
-<p class="p1"><span class="Apple-converted-space">            </span>main_title: "Encuentra tu 'Nombre Bíblico del Alma'", main_desc: "Descubre un nombre coreano especial para ti,&lt;br&gt;nacido de la inspiración bíblica y del MBTI.",</p>
-<p class="p1"><span class="Apple-converted-space">            </span>start_btn: "Buscar mi Nombre", loading_text: "Creando tu nombre...",</p>
-<p class="p1"><span class="Apple-converted-space">            </span>result_p_1: "Tu tipo de personalidad es", result_p_2: "Tu nombre del alma es...",</p>
-<p class="p1"><span class="Apple-converted-space">            </span>reason_title: "El Significado del Nombre", retry_btn: "Reintentar", saju_link: "Encuentra mi nombre coreano a través del análisis Saju",</p>
-<p class="p1"><span class="Apple-converted-space">            </span>questions: [</p>
-<p class="p1"><span class="Apple-converted-space">                </span>{ q: "Cuando me relajo, yo...", a: [{ text: "Obtengo energía al estar con gente.", type: "E" }, { text: "Me recargo pasando tiempo a solas.", type: "I" }] },</p>
-<p class="p1"><span class="Apple-converted-space">                </span>{ q: "Al ver un problema, yo...", a: [{ text: "Confío más en los hechos y la experiencia realistas.", type: "S" }, { text: "Veo significados ocultos y posibilidades futuras.", type: "N" }] },</p>
-<p class="p1"><span class="Apple-converted-space">                </span>{ q: "Al tomar una decisión, yo...", a: [{ text: "Pienso en lo que es justo y lógico.", type: "T" }, { text: "Considero primero el impacto en los demás.", type: "F" }] },</p>
-<p class="p1"><span class="Apple-converted-space">                </span>{ q: "Al hacer una cita, yo...", a: [{ text: "Me siento cómodo planificando con anticipación y cumpliéndolo.", type: "J" }, { text: "Disfruto respondiendo con flexibilidad a las situaciones.", type: "P" }] },</p>
-<p class="p1"><span class="Apple-converted-space">                </span>{ q: "En un nuevo entorno, yo...", a: [{ text: "Tiendo a acercarme a los demás primero e iniciar conversaciones.", type: "E" }, { text: "Tiendo a adaptarme lentamente observando con calma.", type: "I" }] },</p>
-<p class="p1"><span class="Apple-converted-space">                </span>{ q: "Normalmente soy...", a: [{ text: "Más atraído por la información concreta y práctica.", type: "S" }, { text: "Disfruto de las ideas abstractas y filosóficas.", type: "N" }] },</p>
-<p class="p1"><span class="Apple-converted-space">                </span>{ q: "A un amigo que está luchando, yo...", a: [{ text: "Intento encontrar una solución objetiva juntos.", type: "T" }, { text: "Le consuelo cálidamente y empatizo con sus sentimientos.", type: "F" }] },</p>
-<p class="p1"><span class="Apple-converted-space">                </span>{ q: "Mi espacio vital está...", a: [{ text: "Mantenido en un estado limpio y ordenado.", type: "J" }, { text: "Prefiero un ambiente libre y cómodo.", type: "P" }] },</p>
-<p class="p1"><span class="Apple-converted-space">                </span>{ q: "Cuando me expreso, yo...", a: [{ text: "Lo demuestro a través de una amplia gama de experiencias y actividades.", type: "E" }, { text: "Lo demuestro a través de pensamientos y valores profundos.", type: "I" }] },</p>
-<p class="p1"><span class="Apple-converted-space">                </span>{ q: "Mi forma de manejar el trabajo es...", a: [{ text: "Prefiero los métodos tradicionales y probados.", type: "S" }, { text: "Tiendo a probar métodos nuevos e innovadores.", type: "N" }] },</p>
-<p class="p1"><span class="Apple-converted-space">                </span>{ q: "Cuando critico, yo...", a: [{ text: "Hablo claramente basándome en la verdad y los hechos.", type: "T" }, { text: "Me expreso con cuidado, considerando los sentimientos de la otra persona.", type: "F" }] },</p>
-<p class="p1"><span class="Apple-converted-space">                </span>{ q: "Al avanzar hacia una meta...", a: [{ text: "Establezco y ejecuto los pasos sistemáticamente.", type: "J" }, { text: "Disfruto el proceso y exploro nuevas oportunidades.", type: "P" }] },</p>
-<p class="p1"><span class="Apple-converted-space">                </span>{ q: "En una gran reunión...", a: [{ text: "Tiendo a mezclarme con mucha gente diferente.", type: "E" }, { text: "Prefiero tener una conversación profunda con un pequeño grupo de personas con las que conecto.", type: "I" }] },</p>
-<p class="p1"><span class="Apple-converted-space">                </span>{ q: "Al escuchar una explicación, prefiero...", a: [{ text: "Una explicación paso a paso con ejemplos concretos.", type: "S" }, { text: "Una explicación a través de conceptos generales o metáforas.", type: "N" }] },</p>
-<p class="p1"><span class="Apple-converted-space">                </span>{ q: "Cuando surge un conflicto, priorizo...", a: [{ text: "Aclarar lo que está bien y lo que está mal.", type: "T" }, { text: "Asegurarme de que se consideren los sentimientos de todos y mantener la armonía.", type: "F" }] },</p>
-<p class="p1"><span class="Apple-converted-space">                </span>{ q: "Si de repente tengo tiempo libre...", a: [{ text: "Actúo espontáneamente sin un plan establecido.", type: "P" }, { text: "Rápidamente hago un plan sobre qué hacer con el tiempo.", type: "J" }] },</p>
-<p class="p1"><span class="Apple-converted-space">                </span>{ q: "Cuando siento que mi energía está baja...", a: [{ text: "Quiero reunirme con gente para energizarme.", type: "E" }, { text: "Quiero estar completamente solo para recargar.", type: "I" }] },</p>
-<p class="p1"><span class="Apple-converted-space">                </span>{ q: "Cuando compro un dispositivo nuevo...", a: [{ text: "Leo el manual cuidadosamente y sigo los pasos.", type: "S" }, { text: "Aprendo sus funciones presionando botones y descubriéndolo por mí mismo.", type: "N" }] },</p>
-<p class="p1"><span class="Apple-converted-space">                </span>{ q: "Si alguien no está de acuerdo con mi opinión...", a: [{ text: "Intento apoyar mi argumento con lógica en lugar de emoción.", type: "T" }, { text: "Me preocupa que el ambiente se vuelva incómodo.", type: "F" }] },</p>
-<p class="p1"><span class="Apple-converted-space">                </span>{ q: "Al hacer la maleta para un viaje, yo...", a: [{ text: "Hago una lista de los artículos necesarios y empaco meticulosamente.", type: "J" }, { text: "Empaco lo esencial a grandes rasgos y me ocupo del resto en el lugar.", type: "P" }] },</p>
-<p class="p1"><span class="Apple-converted-space">                </span>{ q: "¿Qué expresión me resulta más cómoda?", a: [{ text: "Escribir me resulta más cómodo que hablar.", type: "I" }, { text: "Hablar me resulta más cómodo que escribir.", type: "E" }] },</p>
-<p class="p1"><span class="Apple-converted-space">                </span>{ q: "¿Qué me dicen más a menudo que soy?", a: [{ text: "Con los pies en la tierra y práctico.", type: "S" }, { text: "Imaginativo y creativo.", type: "N" }] },</p>
-<p class="p1"><span class="Apple-converted-space">                </span>{ q: "¿Qué situación es más molesta?", a: [{ text: "Cuando no se reconocen mis habilidades.", type: "T" }, { text: "Cuando no se entienden mis esfuerzos.", type: "F" }] },</p>
-<p class="p1"><span class="Apple-converted-space">                </span>{ q: "Prefiero que mi vida sea...", a: [{ text: "Predecible y estable.", type: "J" }, { text: "Llena de nuevos estímulos y cambios.", type: "P" }] }</p>
-<p class="p1"><span class="Apple-converted-space">            </span>],</p>
-<p class="p1"><span class="Apple-converted-space">            </span>mbtiDescriptions: {</p>
-<p class="p1"><span class="Apple-converted-space">                </span>ISTJ: "La Sal de la Tierra - Responsable y realista, eres un ícono de confianza que siempre cumple sus promesas.", ISFJ: "El Poder Detrás del Trono - Un guardián que cuida a los demás con un corazón cálido y protege devotamente a la comunidad.", INFJ: "El Profeta - Comprende a las personas y al mundo con una profunda perspicacia, avanzando con la creencia en un futuro mejor.", INTJ: "El Científico - Un pensador independiente que analiza el mundo con una estrategia y visión sobresalientes, buscando la perfección en todo.", ISTP: "La Enciclopedia Andante - Un manitas versátil que resuelve problemas de forma lógica y práctica, mostrando una excelente adaptabilidad en las crisis.", ISFP: "El Santo Humilde - Un artista humilde con un corazón cálido que demuestra su valía a través de acciones en lugar de palabras.", INFP: "El Juana de Arco - Un mediador apasionado que sueña con un mundo ideal y valora sus creencias y valores por encima de todo.", INTP: "El Banco de Ideas - Un inventor que explora el mundo con una curiosidad infinita y encuentra nuevas posibilidades a través de la lógica y el análisis.", ESTP: "El Activista Ingenioso - Un aventurero realista que sabe cómo disfrutar de la vida con una energía desbordante y un juicio rápido.", ESFP: "El Socialité - Un espíritu libre que trae alegría a quienes lo rodean con su optimismo y sociabilidad innatos.", ENFP: "La Chispa - Desafía nuevas posibilidades con una pasión ardiente y una rica imaginación, dando inspiración positiva a la gente.", ENTP: "El Polemista - Explora el mundo con una conversación ingeniosa e ideas brillantes, disfrutando de la estimulación intelectual a través del debate.", ESTJ: "El Emprendedor - Un excelente gerente que lidera organizaciones de manera realista con un liderazgo natural y habilidades de gestión sistemática.", ESFJ: "El Embajador de Buena Voluntad - Un diplomático sociable que ayuda a las personas con un cálido interés y consejos prácticos, valorando la armonía de la comunidad.", ENFJ: "El Orador Elocuente - Un activista social justo que lidera a las personas con carisma e ideales, dedicándose al crecimiento de la comunidad.", ENTJ: "El Líder - Un comandante que logra sus metas con una visión audaz y una voluntad fuerte, llevando a la gente a crear un gran cambio."</p>
-<p class="p1"><span class="Apple-converted-space">            </span>},</p>
-<p class="p1"><span class="Apple-converted-space">            </span>biblicalNames: [</p>
-<p class="p1"><span class="Apple-converted-space">                </span>{ id:1, reason: "Combinando caracteres para 'razón' (理) y 'estándar' (準), 'Lee-jun' refleja la sabiduría de Salomón y la meticulosidad del ISTJ, evocando a un líder que construye un mundo sobre principios." },</p>
-<p class="p1"><span class="Apple-converted-space">                </span>{ id:2, reason: "Como Rut que mostró devoción en tierra extranjera, 'Seo-yoon' usa caracteres para 'auspicioso' (瑞) y 'sincero' (允) para expresar el carácter del ISFJ de difundir una fe cálida." },</p>
-<p class="p1"><span class="Apple-converted-space">                </span>{ id:3, reason: "Con el significado de 'río hermoso', 'Do-ha' (渡河) simboliza la capacidad de INFJ/INTJ/ENFJ para guiar a la gente hacia un futuro mejor, como José que salvó a una nación con su gran sueño." },</p>
-<p class="p1"><span class="Apple-converted-space">                </span>{ id:4, reason: "Usando caracteres para 'tiempo' (時) y 'lluvia' (雨), 'Si-woo' significa la sabiduría del INTJ/ENTJ/INTP que llega como lluvia oportuna en momentos cruciales, reflejando la visión de Pablo." },</p>
-<p class="p1"><span class="Apple-converted-space">                </span>{ id:5, reason: "Con caracteres para 'gracia' (恩) y 'estrella' (星), 'Eun-seong' representa la influencia positiva del ESTP/ISTP/ESFP, una luz que guía en la oscuridad, como Pedro, la roca de la fe." },</p>
-<p class="p1"><span class="Apple-converted-space">                </span>{ id:6, reason: "'Ji-an' usa 'sabiduría' (智) y 'paz' (安), capturando el rasgo del ISFP/INFP/INFJ de traer paz a través de una sabiduría nacida del amor profundo, como el apóstol Juan." },</p>
-<p class="p1"><span class="Apple-converted-space">                </span>{ id:7, reason: "Como Isabel que recibió una bendición tras una larga espera, 'Ye-na', usando 'talento' (才) y 'belleza' (娜), significa los hermosos talentos que florecen de la cálida fe de un INFP/ISFJ." },</p>
-<p class="p1"><span class="Apple-converted-space">                </span>{ id:8, reason: "Conteniendo el carácter de 'verdad' (眞), 'Yu-jin' simboliza cómo la sabiduría práctica del ENTP/ISTP crea un valor 'verdadero' que beneficia al mundo, como las sabias elecciones de Rebeca." },</p>
-<p class="p1"><span class="Apple-converted-space">                </span>{ id:9, reason: "'Jae-yi' usa 'talento' (才) y 'alegría' (怡) para mostrar cómo el talento y la positividad del ESTP/ENTJ/ENTP traen alegría, como Jacob que superó pruebas para obtener su bendición." },</p>
-<p class="p1"><span class="Apple-converted-space">                </span>{ id:10, reason: "'Laon', una palabra nativa coreana para 'alegre', refleja perfectamente la naturaleza del ESFP/ISFP/ENFP de difundir felicidad, al igual que Isaac, cuyo nombre significa 'risa'." },</p>
-<p class="p1"><span class="Apple-converted-space">                </span>{ id:11, reason: "'Ha-ram', que significa 'una persona preciosa de Dios', simboliza la influencia positiva de la pasión del ENFP/ESFP/ENFJ, similar a las ricas emociones e inspiración artística de David." },</p>
-<p class="p1"><span class="Apple-converted-space">                </span>{ id:12, reason: "Como el gran líder Moisés, el nombre 'Geon', que usa el carácter 'construir' (建), simboliza el fuerte liderazgo del ESTJ/ISTJ/ENTJ que establece el orden para todos." },</p>
-<p class="p1"><span class="Apple-converted-space">                </span>{ id:13, reason: "Usando 'muchos' (多) y 'gracia' (恩), 'Da-eun' significa cómo el cálido liderazgo del ESFJ/ESTJ/ENTJ otorga gran gracia a su comunidad, como la profetisa Débora." },</p>
-<p class="p1"><span class="Apple-converted-space">                </span>{ id:14, reason: "'Chae-won', que usa 'llenar' (採) y 'primero' (元), captura cómo el brillante liderazgo del ENFJ/INFJ llena el mundo de belleza, reflejando el coraje de Ester para salvar a su pueblo." },</p>
-<p class="p1"><span class="Apple-converted-space">                </span>{ id:15, reason: "Como Elías que luchó contra la injusticia, 'Kang-min', que usa 'fuerte' (强) y 'ágil' (敏), muestra la fuerza y sabiduría del ENTJ/INTJ/ENTP para mantener sus creencias." },</p>
-<p class="p1"><span class="Apple-converted-space">                </span>{ id:16, reason: "Usando 'hermoso' (韶) y 'ley' (律), 'So-yul' representa el hermoso orden de la vida creado por el corazón sincero del ISFJ/INFJ/INFP, como Ana cuyas oraciones fueron respondidas." },</p>
-<p class="p1"><span class="Apple-converted-space">                </span>{ id:17, reason: "Como Bernabé, el 'Hijo de Consolación', 'Seon-yul' ('bueno' 善, 'melodía' 律) significa que el cálido corazón del ENFJ/ESFJ/ENFP se convierte en una hermosa melodía que consuela al mundo." },</p>
-<p class="p1"><span class="Apple-converted-space">                </span>{ id:18, reason: "Usando 'mostrar' (示) y 'cálido' (溫), 'Si-on' significa cómo el liderazgo dedicado del ESTJ/ISTJ/ISFJ presenta una visión cálida a la comunidad, como Nehemías que reconstruyó los muros." },</p>
-<p class="p1"><span class="Apple-converted-space">                </span>{ id:19, reason: "Como Job que superó un sufrimiento extremo, 'Yu-gyeom', que usa 'poseer' (有) y 'humilde' (謙), contiene el carácter profundo del INFJ/ISTJ/ISFJ que permanece humilde incluso teniéndolo todo." },</p>
-<p class="p1"><span class="Apple-converted-space">                </span>{ id:20, reason: "'Ain', que significa 'gema hermosa', simboliza el alma pura del INFP/ISFP que busca el valor interior por encima del ruido mundano, como María de Betania que atesoraba la verdad." },</p>
-<p class="p1"><span class="Apple-converted-space">                </span>{ id:21, reason: "Como el Sansón de fuerza sobrehumana, 'Tae-o', que usa 'grande' (太) y 'alto' (高), muestra el espíritu audaz y enérgico del ESTP que abruma al mundo." },</p>
-<p class="p1"><span class="Apple-converted-space">                </span>{ id:22, reason: "'Yoon-seul', el brillo de las ondas en el sol o la luna, significa el momento en que el alma emocional de un ISFP/INFP/ENFP brilla, como Jonás que encontró la iluminación tras vagar." },</p>
-<p class="p1"><span class="Apple-converted-space">                </span>{ id:23, reason: "Usando 'voluntad' (志) y 'sobresaliente' (秀), 'Ji-su' captura la armonía de un corazón cálido y sabiduría práctica en el ESFJ/ESTJ/ESFP, como Marta que sirvió con devoción práctica." },</p>
-<p class="p1"><span class="Apple-converted-space">                </span>{ id:24, reason: "Como Gedeón, que pasó de ser un hombre tímido a un gran líder, 'Do-yoon' ('camino' 道, 'brillar' 潤) significa que el ISTP/ISFP/INTP ilumina brillantemente el mundo al seguir su propio camino." },</p>
-<p class="p1"><span class="Apple-converted-space">                </span>{ id:25, reason: "'Sae-rom', una palabra nativa coreana para 'novedad', simboliza la novedad y el cambio positivo que persigue el ENTP/ENFP, como Mateo que eligió una nueva vida." },</p>
-<p class="p1"><span class="Apple-converted-space">                </span>{ id:26, reason: "Como el firme Daniel, el nombre 'Gyeol', que usa el carácter 'puro' (潔), significa la voluntad limpia y fuerte del INTJ/ISTJ/ISTP que se adhiere a los principios en cualquier situación." }</p>
-<p class="p1"><span class="Apple-converted-space">            </span>]</p>
-<p class="p1"><span class="Apple-converted-space">        </span>}</p>
-<p class="p1"><span class="Apple-converted-space">    </span>};</p>
-<p class="p2"><span class="Apple-converted-space">    </span></p>
-<p class="p1"><span class="Apple-converted-space">    </span>// --- APPLICATION LOGIC ---</p>
-<p class="p1"><span class="Apple-converted-space">    </span>let currentLang = 'ko';</p>
-<p class="p1"><span class="Apple-converted-space">    </span>let currentQuestionIndex = 0;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>let mbtiScores = { E: 0, I: 0, S: 0, N: 0, T: 0, F: 0, J: 0, P: 0 };</p>
-<p class="p1"><span class="Apple-converted-space">    </span>const dom = {</p>
-<p class="p1"><span class="Apple-converted-space">        </span>body: document.body,</p>
-<p class="p1"><span class="Apple-converted-space">        </span>startScreen: document.getElementById('start-screen'),</p>
-<p class="p1"><span class="Apple-converted-space">        </span>questionScreen: document.getElementById('question-screen'),</p>
-<p class="p1"><span class="Apple-converted-space">        </span>loadingScreen: document.getElementById('loading-screen'),</p>
-<p class="p1"><span class="Apple-converted-space">        </span>resultScreen: document.getElementById('result-screen'),</p>
-<p class="p1"><span class="Apple-converted-space">        </span>mainTitle: document.getElementById('main-title'),</p>
-<p class="p1"><span class="Apple-converted-space">        </span>mainDesc: document.getElementById('main-desc'),</p>
-<p class="p1"><span class="Apple-converted-space">        </span>startBtn: document.getElementById('start-btn'),</p>
-<p class="p1"><span class="Apple-converted-space">        </span>retryBtn: document.getElementById('retry-btn'),</p>
-<p class="p1"><span class="Apple-converted-space">        </span>questionBtns: document.querySelectorAll('.question-btn'),</p>
-<p class="p1"><span class="Apple-converted-space">        </span>progressBar: document.getElementById('progress-bar'),</p>
-<p class="p1"><span class="Apple-converted-space">        </span>questionText: document.getElementById('question-text'),</p>
-<p class="p1"><span class="Apple-converted-space">        </span>loadingText: document.getElementById('loading-text'),</p>
-<p class="p1"><span class="Apple-converted-space">        </span>mbtiType: document.getElementById('mbti-type'),</p>
-<p class="p1"><span class="Apple-converted-space">        </span>mbtiDescription: document.getElementById('mbti-description'),</p>
-<p class="p1"><span class="Apple-converted-space">        </span>soulName: document.getElementById('soul-name'),</p>
-<p class="p1"><span class="Apple-converted-space">        </span>originalName: document.getElementById('original-name'),</p>
-<p class="p1"><span class="Apple-converted-space">        </span>reason: document.getElementById('reason'),</p>
-<p class="p1"><span class="Apple-converted-space">        </span>resultP1: document.getElementById('result-p-1'),</p>
-<p class="p1"><span class="Apple-converted-space">        </span>resultP2: document.getElementById('result-p-2'),</p>
-<p class="p1"><span class="Apple-converted-space">        </span>reasonTitle: document.getElementById('reason-title'),</p>
-<p class="p1"><span class="Apple-converted-space">        </span>langSwitcher: document.getElementById('lang-switcher'),</p>
-<p class="p1"><span class="Apple-converted-space">        </span>langToggleBtn: document.getElementById('lang-toggle-btn'),</p>
-<p class="p1"><span class="Apple-converted-space">        </span>selectedLang: document.getElementById('selected-lang'),</p>
-<p class="p1"><span class="Apple-converted-space">        </span>langMenu: document.getElementById('lang-menu'),</p>
-<p class="p1"><span class="Apple-converted-space">        </span>langOptions: document.querySelectorAll('.lang-option'),</p>
-<p class="p1"><span class="Apple-converted-space">        </span>sajuLink: document.getElementById('saju-link')</p>
-<p class="p1"><span class="Apple-converted-space">    </span>};</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">    </span>dom.startBtn.addEventListener('click', startTest);</p>
-<p class="p1"><span class="Apple-converted-space">    </span>dom.retryBtn.addEventListener('click', resetTest);</p>
-<p class="p1"><span class="Apple-converted-space">    </span>dom.questionBtns.forEach(button =&gt; {</p>
-<p class="p1"><span class="Apple-converted-space">        </span>button.addEventListener('click', (e) =&gt; selectAnswer(e.target.dataset.type));</p>
-<p class="p1"><span class="Apple-converted-space">    </span>});</p>
-<p class="p1"><span class="Apple-converted-space">    </span>dom.langToggleBtn.addEventListener('click', () =&gt; {</p>
-<p class="p1"><span class="Apple-converted-space">        </span>dom.langMenu.classList.toggle('hidden');</p>
-<p class="p1"><span class="Apple-converted-space">    </span>});</p>
-<p class="p1"><span class="Apple-converted-space">    </span>dom.langOptions.forEach(option =&gt; {</p>
-<p class="p1"><span class="Apple-converted-space">        </span>option.addEventListener('click', (e) =&gt; {</p>
-<p class="p1"><span class="Apple-converted-space">            </span>e.preventDefault();</p>
-<p class="p1"><span class="Apple-converted-space">            </span>setLanguage(option.dataset.lang);</p>
-<p class="p1"><span class="Apple-converted-space">            </span>dom.langMenu.classList.add('hidden');</p>
-<p class="p1"><span class="Apple-converted-space">        </span>});</p>
-<p class="p1"><span class="Apple-converted-space">    </span>});</p>
-<p class="p1"><span class="Apple-converted-space">    </span>window.addEventListener('click', (e) =&gt; {</p>
-<p class="p1"><span class="Apple-converted-space">        </span>if (!dom.langSwitcher.contains(e.target)) {</p>
-<p class="p1"><span class="Apple-converted-space">            </span>dom.langMenu.classList.add('hidden');</p>
-<p class="p1"><span class="Apple-converted-space">        </span>}</p>
-<p class="p1"><span class="Apple-converted-space">    </span>});</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">    </span>function setLanguage(lang) {</p>
-<p class="p1"><span class="Apple-converted-space">        </span>currentLang = lang;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>document.documentElement.lang = lang;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>dom.body.className = `bg-gray-50 text-gray-800 flex items-center justify-center min-h-screen p-4 ${lang}`;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>const t = langData[lang];</p>
-<p class="p1"><span class="Apple-converted-space">        </span>dom.selectedLang.innerHTML = `&lt;span class="text-lg"&gt;${t.flag}&lt;/span&gt; &lt;span class="font-medium"&gt;${t.code}&lt;/span&gt;`;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>dom.langOptions.forEach(option =&gt; {</p>
-<p class="p1"><span class="Apple-converted-space">            </span>const langCode = option.dataset.lang;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>const langInfo = langData[langCode];</p>
-<p class="p1"><span class="Apple-converted-space">            </span>option.innerHTML = `&lt;span class="text-lg"&gt;${langInfo.flag}&lt;/span&gt; &lt;span class="font-medium"&gt;${langInfo.code}&lt;/span&gt;`;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>});</p>
-<p class="p1"><span class="Apple-converted-space">        </span>dom.mainTitle.textContent = t.main_title;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>dom.mainDesc.innerHTML = t.main_desc;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>dom.startBtn.textContent = t.start_btn;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>dom.loadingText.textContent = t.loading_text;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>dom.resultP1.textContent = t.result_p_1;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>dom.resultP2.textContent = t.result_p_2;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>dom.reasonTitle.textContent = t.reason_title;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>dom.retryBtn.textContent = t.retry_btn;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>dom.sajuLink.textContent = t.saju_link;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">    </span>function startTest() {</p>
-<p class="p1"><span class="Apple-converted-space">        </span>dom.startScreen.classList.add('hidden');</p>
-<p class="p1"><span class="Apple-converted-space">        </span>dom.questionScreen.classList.remove('hidden');</p>
-<p class="p1"><span class="Apple-converted-space">        </span>dom.questionScreen.classList.add('fade-in');</p>
-<p class="p1"><span class="Apple-converted-space">        </span>currentQuestionIndex = 0;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>mbtiScores = { E: 0, I: 0, S: 0, N: 0, T: 0, F: 0, J: 0, P: 0 };</p>
-<p class="p1"><span class="Apple-converted-space">        </span>showQuestion();</p>
-<p class="p1"><span class="Apple-converted-space">    </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">    </span>function showQuestion() {</p>
-<p class="p1"><span class="Apple-converted-space">        </span>const questions = langData[currentLang].questions;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>const question = questions[currentQuestionIndex];</p>
-<p class="p1"><span class="Apple-converted-space">        </span>dom.questionText.textContent = question.q;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>dom.questionBtns[0].textContent = question.a[0].text;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>dom.questionBtns[0].dataset.type = question.a[0].type;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>dom.questionBtns[1].textContent = question.a[1].text;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>dom.questionBtns[1].dataset.type = question.a[1].type;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>const progress = ((currentQuestionIndex + 1) / questions.length) * 100;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>dom.progressBar.style.width = `${progress}%`;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">    </span>function selectAnswer(type) {</p>
-<p class="p1"><span class="Apple-converted-space">        </span>mbtiScores[type]++;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>currentQuestionIndex++;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>if (currentQuestionIndex &lt; langData[currentLang].questions.length) {</p>
-<p class="p1"><span class="Apple-converted-space">            </span>showQuestion();</p>
-<p class="p1"><span class="Apple-converted-space">        </span>} else {</p>
-<p class="p1"><span class="Apple-converted-space">            </span>showLoading();</p>
-<p class="p1"><span class="Apple-converted-space">        </span>}</p>
-<p class="p1"><span class="Apple-converted-space">    </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">    </span>function showLoading() {</p>
-<p class="p1"><span class="Apple-converted-space">        </span>dom.questionScreen.classList.add('hidden');</p>
-<p class="p1"><span class="Apple-converted-space">        </span>dom.loadingScreen.classList.remove('hidden');</p>
-<p class="p1"><span class="Apple-converted-space">        </span>setTimeout(calculateResult, 2000);</p>
-<p class="p1"><span class="Apple-converted-space">    </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">    </span>function calculateResult() {</p>
-<p class="p1"><span class="Apple-converted-space">        </span>let result = "";</p>
-<p class="p1"><span class="Apple-converted-space">        </span>result += mbtiScores.E &gt; mbtiScores.I ? "E" : "I";</p>
-<p class="p1"><span class="Apple-converted-space">        </span>result += mbtiScores.S &gt; mbtiScores.N ? "S" : "N";</p>
-<p class="p1"><span class="Apple-converted-space">        </span>result += mbtiScores.T &gt; mbtiScores.F ? "T" : "F";</p>
-<p class="p1"><span class="Apple-converted-space">        </span>result += mbtiScores.J &gt; mbtiScores.P ? "J" : "P";</p>
-<p class="p1"><span class="Apple-converted-space">        </span>findSoulName(result);</p>
-<p class="p1"><span class="Apple-converted-space">    </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">    </span>function findSoulName(mbtiType) {</p>
-<p class="p1"><span class="Apple-converted-space">        </span>const namePool = biblicalNamesDatabase.filter(name =&gt; name.associatedMBTI.includes(mbtiType));</p>
-<p class="p1"><span class="Apple-converted-space">        </span>let chosenName;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>if (namePool.length &gt; 0) {</p>
-<p class="p1"><span class="Apple-converted-space">            </span>chosenName = namePool[Math.floor(Math.random() * namePool.length)];</p>
-<p class="p1"><span class="Apple-converted-space">        </span>} else {</p>
-<p class="p1"><span class="Apple-converted-space">            </span>chosenName = { id: 0, koreanName: "은총", originalName: "기본값", associatedMBTI: [] };</p>
-<p class="p1"><span class="Apple-converted-space">            </span>if (!langData.ko.biblicalNames.find(n =&gt; n.id === 0)) {</p>
-<p class="p1"><span class="Apple-converted-space">                </span>langData.ko.biblicalNames.push({ id: 0, reason: "어떤 상황에서도 믿음을 지키는 당신의 모습에서 새로운 시작의 가능성을 봅니다." });</p>
-<p class="p1"><span class="Apple-converted-space">                </span>langData.en.biblicalNames.push({ id: 0, reason: "In your unwavering faith in any situation, we see the possibility of a new beginning." });</p>
-<p class="p1"><span class="Apple-converted-space">                </span>langData.es.biblicalNames.push({ id: 0, reason: "En tu fe inquebrantable en cualquier situación, vemos la posibilidad de un nuevo comienzo." });</p>
-<p class="p1"><span class="Apple-converted-space">            </span>}</p>
-<p class="p1"><span class="Apple-converted-space">        </span>}</p>
-<p class="p1"><span class="Apple-converted-space">        </span>displayResult(mbtiType, chosenName);</p>
-<p class="p1"><span class="Apple-converted-space">    </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">    </span>function displayResult(mbtiType, soulNameData) {</p>
-<p class="p1"><span class="Apple-converted-space">        </span>const translatedReasonObj = langData[currentLang].biblicalNames.find(n =&gt; n.id === soulNameData.id);</p>
-<p class="p1"><span class="Apple-converted-space">        </span>dom.mbtiType.textContent = mbtiType;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>const mbtiDesc = langData[currentLang].mbtiDescriptions[mbtiType];</p>
-<p class="p1"><span class="Apple-converted-space">        </span>if (mbtiDesc) {</p>
-<p class="p1"><span class="Apple-converted-space">            </span>dom.mbtiDescription.textContent = mbtiDesc;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>} else {</p>
-<p class="p1"><span class="Apple-converted-space">            </span>dom.mbtiDescription.textContent = "성향에 대한 설명을 찾을 수 없습니다.";</p>
-<p class="p1"><span class="Apple-converted-space">        </span>}</p>
-<p class="p1"><span class="Apple-converted-space">        </span>dom.soulName.textContent = soulNameData.koreanName;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>dom.originalName.textContent = soulNameData.originalName;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>dom.reason.textContent = translatedReasonObj ? translatedReasonObj.reason : "No reason found.";</p>
-<p class="p1"><span class="Apple-converted-space">        </span>dom.loadingScreen.classList.add('hidden');</p>
-<p class="p1"><span class="Apple-converted-space">        </span>dom.resultScreen.classList.remove('hidden');</p>
-<p class="p1"><span class="Apple-converted-space">    </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">    </span>function resetTest() {</p>
-<p class="p1"><span class="Apple-converted-space">        </span>dom.resultScreen.classList.add('hidden');</p>
-<p class="p1"><span class="Apple-converted-space">        </span>dom.startScreen.classList.remove('hidden');</p>
-<p class="p1"><span class="Apple-converted-space">        </span>dom.startScreen.classList.add('fade-in');</p>
-<p class="p1"><span class="Apple-converted-space">    </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">    </span>function initializeApp() {</p>
-<p class="p1"><span class="Apple-converted-space">        </span>const userLang = navigator.language.split('-')[0];</p>
-<p class="p1"><span class="Apple-converted-space">        </span>const initialLang = ['ko', 'en', 'es'].includes(userLang) ? userLang : 'ko';</p>
-<p class="p1"><span class="Apple-converted-space">        </span>setLanguage(initialLang);</p>
-<p class="p1"><span class="Apple-converted-space">    </span>}</p>
-<p class="p2"><span class="Apple-converted-space">    </span></p>
-<p class="p1"><span class="Apple-converted-space">    </span>initializeApp();</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;/script&gt;</p>
-<p class="p1">&lt;/body&gt;</p>
-<p class="p1">&lt;/html&gt;</p>
+<body class="bg-gray-50 text-gray-800 flex items-center justify-center min-h-screen p-4">
+
+    <div class="w-full max-w-md mx-auto">
+        
+        <!-- 1. 시작 화면 (Start Screen) -->
+        <div id="start-screen" class="text-center p-6 fade-in">
+            <!-- Title and Language Selector Container -->
+            <div class="flex flex-wrap justify-center items-center gap-x-3 gap-y-2 mb-4">
+                <h1 id="main-title" class="text-3xl font-bold text-gray-900 whitespace-nowrap"></h1>
+                
+                <!-- Language Dropdown -->
+                <div id="lang-switcher" class="relative">
+                    <button id="lang-toggle-btn" class="flex items-center justify-between w-24 px-3 py-2 text-sm font-medium text-left text-gray-700 bg-white border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-indigo-500">
+                        <span id="selected-lang" class="flex items-center gap-2"></span>
+                        <svg class="w-5 h-5 -mr-1 text-gray-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                            <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+                        </svg>
+                    </button>
+                    <div id="lang-menu" class="absolute right-0 w-full mt-1 origin-top-right bg-white border border-gray-200 rounded-md shadow-lg hidden z-10">
+                        <div class="py-1">
+                            <a href="#" class="lang-option flex items-center gap-3 px-3 py-2 text-sm text-gray-700 hover:bg-gray-100" data-lang="ko"></a>
+                            <a href="#" class="lang-option flex items-center gap-3 px-3 py-2 text-sm text-gray-700 hover:bg-gray-100" data-lang="en"></a>
+                            <a href="#" class="lang-option flex items-center gap-3 px-3 py-2 text-sm text-gray-700 hover:bg-gray-100" data-lang="es"></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <p id="main-desc" class="text-gray-600 mb-8"></p>
+            <button id="start-btn" class="custom-btn bg-indigo-600 text-white font-bold py-3 px-8 rounded-full text-lg hover:bg-indigo-700"></button>
+        </div>
+
+        <!-- 2. 질문 화면 (Question Screen) -->
+        <div id="question-screen" class="hidden">
+            <div class="w-full bg-gray-200 rounded-full h-2.5 mb-6">
+                <div id="progress-bar" class="bg-indigo-500 h-2.5 rounded-full" style="width: 0%"></div>
+            </div>
+            <div id="question-container" class="bg-white p-8 rounded-xl shadow-md">
+                <h2 id="question-text" class="text-xl font-bold mb-6 text-center"></h2>
+                <div class="space-y-4">
+                    <button class="question-btn custom-btn w-full bg-white border border-gray-300 text-gray-700 py-4 px-4 rounded-lg hover:bg-indigo-50 hover:border-indigo-400 text-left"></button>
+                    <button class="question-btn custom-btn w-full bg-white border border-gray-300 text-gray-700 py-4 px-4 rounded-lg hover:bg-indigo-50 hover:border-indigo-400 text-left"></button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 3. 로딩 화면 (Loading Screen) -->
+        <div id="loading-screen" class="hidden text-center p-6 fade-in">
+            <div class="flex justify-center items-center mb-4">
+                <div class="loader"></div>
+            </div>
+            <p id="loading-text" class="text-lg font-semibold text-gray-700"></p>
+        </div>
+
+        <!-- 4. 결과 화면 (Result Screen) -->
+        <div id="result-screen" class="hidden fade-in">
+            <div class="result-card">
+                <div class="result-header text-center">
+                    <p id="result-p-1" class="font-semibold text-lg opacity-90"></p>
+                    <h2 id="mbti-type" class="text-5xl font-extrabold mt-1">MBTI</h2>
+                </div>
+                
+                <div class="p-6 md:p-8">
+                    <div id="mbti-description" class="text-center text-gray-600 mb-8 p-4 bg-indigo-50 rounded-lg"></div>
+
+                    <div class="text-center">
+                        <p id="result-p-2" class="text-gray-500 text-sm"></p>
+                        <h3 id="soul-name" class="text-4xl font-bold my-2 text-indigo-700">소울네임</h3>
+                        <p id="original-name" class="text-gray-500 text-lg mb-6"></p>
+                    </div>
+
+                    <div class="bg-gray-100 p-5 rounded-lg">
+                        <h4 id="reason-title" class="font-bold text-gray-800 mb-2"></h4>
+                        <p id="reason" class="text-gray-700 leading-relaxed"></p>
+                    </div>
+                </div>
+
+                <div class="p-6 bg-gray-50 border-t border-gray-200 text-center">
+                     <button id="retry-btn" class="custom-btn bg-indigo-600 text-white font-bold py-3 px-8 rounded-full hover:bg-indigo-700 mb-4"></button>
+                     <div>
+                        <a href="#" id="saju-link" target="_blank" rel="noopener noreferrer" class="saju-link-animated text-base font-medium text-gray-600 hover:text-indigo-600"></a>
+                     </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+    // --- CORE DATA (v3.0) ---
+    const biblicalNamesDatabase = [
+        { id:1, koreanName: "이준", originalName: "솔로몬 영감", associatedMBTI: ["ISTJ", "INTP"]},
+        { id:2, koreanName: "서윤", originalName: "룻 영감", associatedMBTI: ["ISFJ", "ESFJ"]},
+        { id:3, koreanName: "도하", originalName: "요셉 영감", associatedMBTI: ["INFJ", "INTJ", "ENFJ"]},
+        { id:4, koreanName: "시우", originalName: "바울 영감", associatedMBTI: ["INTJ", "ENTJ", "INTP"]},
+        { id:5, koreanName: "은성", originalName: "베드로 영감", associatedMBTI: ["ESTP", "ISTP", "ESFP"]},
+        { id:6, koreanName: "지안", originalName: "요한 영감", associatedMBTI: ["ISFP", "INFP", "INFJ"]},
+        { id:7, koreanName: "예나", originalName: "엘리사벳 영감", associatedMBTI: ["INFP", "ISFJ"]},
+        { id:8, koreanName: "유진", originalName: "리브가 영감", associatedMBTI: ["ENTP", "ISTP"]},
+        { id:9, koreanName: "재이", originalName: "야곱 영감", associatedMBTI: ["ESTP", "ENTJ", "ENTP"]},
+        { id:10, koreanName: "라온", originalName: "이삭 영감", associatedMBTI: ["ESFP", "ISFP", "ENFP"]},
+        { id:11, koreanName: "하람", originalName: "다윗 영감", associatedMBTI: ["ENFP", "ESFP", "ENFJ", "ESTP"]},
+        { id:12, koreanName: "건", originalName: "모세 영감", associatedMBTI: ["ESTJ", "ISTJ", "ENTJ"]},
+        { id:13, koreanName: "다은", originalName: "드보라 영감", associatedMBTI: ["ESFJ", "ESTJ", "ENTJ"]},
+        { id:14, koreanName: "채원", originalName: "에스더 영감", associatedMBTI: ["ENFJ", "INFJ"]},
+        { id:15, koreanName: "강민", originalName: "엘리야 영감", associatedMBTI: ["ENTJ", "INTJ", "ENTP"]},
+        { id:16, koreanName: "소율", originalName: "한나 영감", associatedMBTI: ["ISFJ", "INFJ", "INFP"]},
+        { id:17, koreanName: "선율", originalName: "바나바 영감", associatedMBTI: ["ENFJ", "ESFJ", "ENFP", "ESFP"]},
+        { id:18, koreanName: "시온", originalName: "느헤미야 영감", associatedMBTI: ["ESTJ", "ISTJ", "ISFJ"]},
+        { id:19, koreanName: "유겸", originalName: "욥 영감", associatedMBTI: ["INFJ", "ISTJ", "ISFJ"]},
+        { id:20, koreanName: "아인", originalName: "마리아(베다니) 영감", associatedMBTI: ["INFP", "ISFP"]},
+        { id:21, koreanName: "태오", originalName: "삼손 영감", associatedMBTI: ["ESTP"]},
+        { id:22, koreanName: "윤슬", originalName: "요나 영감", associatedMBTI: ["ISFP", "INFP", "ENFP"]},
+        { id:23, koreanName: "지수", originalName: "마르다 영감", associatedMBTI: ["ESFJ", "ESTJ", "ESFP"]},
+        { id:24, koreanName: "도윤", originalName: "기드온 영감", associatedMBTI: ["ISTP", "ISFP", "INTP"]},
+        { id:25, koreanName: "새롬", originalName: "마태 영감", associatedMBTI: ["ENTP", "ENFP"]},
+        { id:26, koreanName: "결", originalName: "다니엘 영감", associatedMBTI: ["INTJ", "ISTJ", "ISTP"]}
+    ];
+
+    // --- LANGUAGE DATA STORE (v3.0 - 24 Questions) ---
+    const langData = {
+        ko: {
+            name: 'Korean', flag: '🇰🇷', code: 'KR',
+            main_title: "나의 '성경적 소울네임' 찾기", main_desc: "MBTI와 성경적 영감으로 탄생한<br>당신만의 특별한 한국 이름을 찾아보세요.",
+            start_btn: "이름 찾기", loading_text: "이름을 만들고 있어요...",
+            result_p_1: "당신의 성격 유형은", result_p_2: "당신을 위한 소울네임은...",
+            reason_title: "이름에 담긴 의미", retry_btn: "다시하기", saju_link: "사주풀이를 통한 내 한국 이름 찾아보기",
+            questions: [
+                 { q: "휴식을 취할 때 나는...", a: [{ text: "사람들과 어울리며 에너지를 얻는다.", type: "E" }, { text: "혼자만의 시간을 보내며 재충전한다.", type: "I" }] },
+                 { q: "문제를 볼 때 나는...", a: [{ text: "현실적인 사실과 경험을 더 신뢰한다.", type: "S" }, { text: "숨겨진 의미와 미래의 가능성을 본다.", type: "N" }] },
+                 { q: "결정할 때 나는...", a: [{ text: "무엇이 공정하고 논리적인지 생각한다.", type: "T" }, { text: "다른 사람에게 미칠 영향을 먼저 고려한다.", type: "F" }] },
+                 { q: "약속을 정할 때 나는...", a: [{ text: "미리 계획을 세우고 지키는 것이 편하다.", type: "J" }, { text: "상황에 따라 유연하게 대처하는 것을 즐긴다.", type: "P" }] },
+                 { q: "새로운 환경에서 나는...", a: [{ text: "먼저 다가가고 대화를 시작하는 편이다.", type: "E" }, { text: "차분히 관찰하며 서서히 적응하는 편이다.", type: "I" }] },
+                 { q: "나는 보통...", a: [{ text: "구체적이고 실용적인 정보에 더 끌린다.", type: "S" }, { text: "추상적이고 철학적인 아이디어를 즐긴다.", type: "N" }] },
+                 { q: "힘든 친구에게 나는...", a: [{ text: "객관적인 해결책을 함께 찾아주려 한다.", type: "T" }, { text: "따뜻하게 공감하며 마음을 위로해준다.", type: "F" }] },
+                 { q: "나의 생활 공간은...", a: [{ text: "깔끔하게 정리정돈된 상태를 유지한다.", type: "J" }, { text: "자유롭고 편안한 분위기를 선호한다.", type: "P" }] },
+                 { q: "나는 나를 표현할 때...", a: [{ text: "폭넓은 경험과 활동으로 보여준다.", type: "E" }, { text: "깊이 있는 생각과 가치관으로 보여준다.", type: "I" }] },
+                 { q: "일을 처리하는 방식은...", a: [{ text: "전통적이고 검증된 방법을 선호한다.", type: "S" }, { text: "새롭고 혁신적인 방법을 시도하는 편이다.", type: "N" }] },
+                 { q: "나는 비판을 할 때...", a: [{ text: "진실과 사실에 근거하여 명확하게 말한다.", type: "T" }, { text: "상대방의 감정을 생각해 조심스럽게 표현한다.", type: "F" }] },
+                 { q: "목표를 향해 나아갈 때...", a: [{ text: "체계적으로 단계를 설정하고 실행한다.", type: "J" }, { text: "과정을 즐기며 새로운 기회를 탐색한다.", type: "P" }] },
+                 { q: "대규모 모임에 가면...", a: [{ text: "많은 사람들과 두루 어울리는 편이다.", type: "E" }, { text: "마음이 맞는 소수와 깊게 이야기하는 편이다.", type: "I" }] },
+                 { q: "설명을 들을 때 더 편한 방식은...", a: [{ text: "순서대로, 구체적인 예시를 들어주는 것.", type: "S" }, { text: "전체적인 개념이나 비유를 통해 설명하는 것.", type: "N" }] },
+                 { q: "갈등이 생겼을 때 우선적으로...", a: [{ text: "옳고 그름을 명확히 하는 것이 중요하다고 생각한다.", type: "T" }, { text: "모두의 감정이 상하지 않고 화합하는 것이 중요하다고 생각한다.", type: "F" }] },
+                 { q: "갑자기 여가 시간이 생기면...", a: [{ text: "정해진 계획 없이 즉흥적으로 행동하는 편이다.", type: "P" }, { text: "남은 시간 동안 무엇을 할지 빠르게 계획한다.", type: "J" }] },
+                 { q: "에너지가 떨어졌다고 느낄 때...", a: [{ text: "사람들을 만나서 활력을 얻고 싶다.", type: "E" }, { text: "완전히 혼자 있으면서 충전하고 싶다.", type: "I" }] },
+                 { q: "새로운 기기를 샀을 때...", a: [{ text: "설명서를 꼼꼼히 읽고 순서대로 따른다.", type: "S" }, { text: "일단 눌러보면서 스스로 기능을 터득한다.", type: "N" }] },
+                 { q: "누군가 내 의견에 반대하면...", a: [{ text: "감정보다 논리로 내 주장을 뒷받침하려 한다.", type: "T" }, { text: "분위기가 껄끄러워질까 봐 걱정부터 된다.", type: "F" }] },
+                 { q: "여행 가방을 쌀 때 나는...", a: [{ text: "필요한 물건 목록을 만들어 꼼꼼히 챙긴다.", type: "J" }, { text: "필수적인 것들만 대강 챙기고 나머지는 현지에서 해결한다.", type: "P" }] },
+                 { q: "나에게 더 익숙한 표현은...", a: [{ text: "말보다는 글이 더 편하다.", type: "I" }, { text: "글보다는 말이 더 편하다.", type: "E" }] },
+                 { q: "나는 어떤 사람이라는 말을 더 자주 듣는가?", a: [{ text: "현실 감각이 뛰어나다.", type: "S" }, { text: "상상력이 풍부하다.", type: "N" }] },
+                 { q: "더 기분 나쁜 상황은...", a: [{ text: "나의 능력을 인정받지 못하는 상황.", type: "T" }, { text: "나의 노력을 이해받지 못하는 상황.", type: "F" }] },
+                 { q: "나의 삶은...", a: [{ text: "예측 가능하고 안정적인 것이 더 좋다.", type: "J" }, { text: "새로운 자극과 변화가 있는 것이 더 좋다.", type: "P" }] }
+            ],
+            mbtiDescriptions: {
+                ISTJ: "세상의 소금형 - 책임감이 강하고 현실적인 당신은 약속을 반드시 지키는 신뢰의 아이콘입니다.", ISFJ: "임금 뒷편의 권력형 - 따뜻한 마음으로 주변을 챙기며, 헌신적으로 공동체를 지키는 수호자입니다.", INFJ: "예언자형 - 깊은 통찰력으로 사람과 세상을 이해하며, 더 나은 미래를 향한 신념을 가지고 나아갑니다.", INTJ: "과학자형 - 뛰어난 전략과 비전으로 세상을 분석하고, 모든 일에 완벽을 추구하는 독립적인 사상가입니다.", ISTP: "백과사전형 - 논리적이고 실용적으로 문제를 해결하며, 위기 상황에서 뛰어난 적응력을 보여주는 만능 재주꾼입니다.", ISFP: "성인군자형 - 따뜻한 마음을 가진 겸손한 예술가로, 말보다는 행동으로 자신의 가치를 증명합니다.", INFP: "잔다르크형 - 이상적인 세상을 꿈꾸는 열정적인 중재자로, 자신의 신념과 가치를 무엇보다 소중히 여깁니다.", INTP: "아이디어 뱅크형 - 끊임없는 호기심으로 세상을 탐구하며, 논리와 분석으로 새로운 가능성을 찾아내는 발명가입니다.", ESTP: "수완좋은 활동가형 - 넘치는 에너지와 빠른 상황 판단으로, 인생을 즐길 줄 아는 현실적인 모험가입니다.", ESFP: "사교적인 유형 - 타고난 낙천성과 사교성으로 주변에 즐거움을 선사하는 자유로운 영혼의 소유자입니다.", ENFP: "스파크형 - 뜨거운 열정과 풍부한 상상력으로 새로운 가능성에 도전하며, 사람들에게 긍정적인 영감을 줍니다.", ENTP: "발명가형 - 재치있는 입담과 기발한 생각으로 세상을 탐험하며, 논쟁을 통해 지적인 자극을 즐기는 변론가입니다.", ESTJ: "사업가형 - 타고난 리더십과 체계적인 관리 능력으로, 조직을 현실적으로 이끌어가는 뛰어난 경영자입니다.", ESFJ: "친선도모형 - 따뜻한 관심과 현실적인 조언으로 사람들을 돕고, 공동체의 화합을 중요시하는 사교적인 외교관입니다.", ENFJ: "언변능숙형 - 카리스마와 이상으로 사람들을 이끌며, 공동체의 성장을 위해 헌신하는 정의로운 사회운동가입니다.", ENTJ: "지도자형 - 대담한 비전과 강력한 의지로 목표를 성취하며, 사람들을 이끌어 위대한 변화를 만들어내는 통솔자입니다."
+            },
+            biblicalNames: [
+                { id:1, reason: "왕국의 기틀을 다진 솔로몬의 지혜와 ISTJ의 철두철미함이 '바를 이(理), 준할 준(準)' 자에 담겨, 원칙과 기준으로 세상을 바로 세우는 리더의 모습을 떠올리게 합니다." },
+                { id:2, reason: "낯선 땅에서 헌신적인 사랑을 보여준 룻처럼, '상서로울 서(瑞), 진실로 윤(允)' 자는 주변에 따뜻한 믿음과 온기를 전하는 ISFJ의 성품을 표현합니다." },
+                { id:3, reason: "큰 꿈을 통해 민족을 구원한 요셉의 통찰력처럼, '아름다운 강'을 뜻하는 '도하(渡河)'는 사람들을 더 나은 미래로 이끄는 INFJ/INTJ/ENFJ의 모습을 상징합니다." },
+                { id:4, reason: "세상을 바꾼 바울의 비전처럼 '때 시(時), 비 우(雨)'를 쓰는 '시우'는, INTJ/ENTJ/INTP가 가진 지혜가 가장 필요한 순간에 단비처럼 내리는 것을 의미합니다." },
+                { id:5, reason: "반석 같은 믿음의 베드로처럼, '은혜 은(恩), 별 성(星)'을 쓰는 '은성'은 어둠 속에서도 길을 밝히는 ESTP/ISTP/ESFP의 긍정적인 영향력을 의미합니다." },
+                { id:6, reason: "'사랑의 사도' 요한처럼 '지혜 지(智), 편안할 안(安)'을 쓰는 '지안'은, 깊은 사랑에서 비롯된 지혜로 공동체에 평안을 가져오는 ISFP/INFP/INFJ의 특징을 담았습니다." },
+                { id:7, reason: "오랜 기다림 끝에 축복을 맞이한 엘리사벳처럼, '재주 예(才), 아름다울 나(娜)'를 쓰는 '예나'는 INFP/ISFJ의 따뜻한 믿음이 아름다운 재능으로 피어남을 뜻합니다." },
+                { id:8, reason: "지혜로운 선택으로 미래를 연 리브가처럼, '참 진(眞)'을 품은 '유진'은 ENTP/ISTP의 실용적인 지혜가 세상을 이롭게 하는 '진짜' 가치를 만들어냄을 상징합니다." },
+                { id:9, reason: "수많은 시련을 넘어 축복을 쟁취한 야곱처럼, '재주 재(才), 기쁠 이(怡)' 자를 쓰는 '재이'는 ESTP/ENTJ/ENTP의 재능과 긍정적인 태도가 결국 기쁨을 가져옴을 의미합니다." },
+                { id:10, reason: "'즐거움'을 뜻하는 순우리말 '라온'은, '웃음'이란 뜻의 이삭처럼 주변에 기쁨과 긍정의 에너지를 퍼뜨리는 ESFP/ISFP/ENFP의 모습을 그대로 보여줍니다." },
+                { id:11, reason: "하나님이 주신 소중한 사람이라는 뜻의 '하람'은, 다윗의 풍부한 감성과 예술가적 영감, 그리고 ENFP/ESFP/ENFJ의 열정이 주변에 미치는 선한 영향력을 상징합니다." },
+                { id:12, reason: "위대한 지도자 모세처럼, '세울 건(建)' 자를 쓰는 이름 '건'은 공동체의 법과 질서를 세워 모두를 이끄는 ESTJ/ISTJ/ENTJ의 굳건한 리더십을 상징합니다." },
+                { id:13, reason: "지혜로운 여선지자 드보라처럼, '많을 다(多), 은혜 은(恩)' 자를 쓰는 '다은'은 ESFJ/ESTJ/ENTJ의 따뜻한 리더십이 공동체에 많은 은혜를 베푸는 모습을 의미합니다." },
+                { id:14, reason: "민족을 구원한 에스더의 용기처럼, '채울 채(採), 으뜸 원(元)'을 쓰는 '채원'은 ENFJ/INFJ의 빛나는 리더십이 세상을 아름다움으로 채우고 최고로 이끄는 모습을 담았습니다." },
+                { id:15, reason: "불의에 맞선 선지자 엘리야처럼, '굳셀 강(强), 민첩할 민(敏)'을 쓰는 '강민'은 어떠한 상황에서도 신념을 지키는 ENTJ/INTJ/ENTP의 강인함과 지혜를 보여줍니다." },
+                { id:16, reason: "간절한 기도로 응답받은 한나처럼, '고울 소(韶), 법 율(律)'을 쓰는 '소율'은 ISFJ/INFJ/INFP의 진실된 마음이 만들어내는 아름다운 삶의 질서를 의미합니다." },
+                { id:17, reason: "'위로의 아들' 바나바처럼 '착할 선(善), 가락 율(律)'을 쓰는 '선율'은, ENFJ/ESFJ/ENFP의 따뜻한 마음이 세상을 위로하는 아름다운 선율이 됨을 의미합니다." },
+                { id:18, reason: "무너진 성벽을 재건한 느헤미야처럼, '보일 시(示), 따뜻할 온(溫)' 자를 쓰는 '시온'은 ESTJ/ISTJ/ISFJ의 헌신적인 리더십이 공동체에 따뜻한 비전을 보여줌을 뜻합니다." },
+                { id:19, reason: "극한의 고난을 이겨낸 욥처럼, '있을 유(有), 겸손할 겸(謙)'을 쓰는 '유겸'은 모든 것을 가졌을 때에도 겸손함을 잃지 않는 INFJ/ISTJ/ISFJ의 깊은 성품을 담았습니다." },
+                { id:20, reason: "진리를 사모한 베다니의 마리아처럼, '아름다운 보석'을 뜻하는 '아인(AIN)'은 세상의 소리보다 내면의 가치를 추구하는 INFP/ISFP의 순수한 영혼을 상징합니다." },
+                { id:21, reason: "초인적인 힘의 삼손처럼, '클 태(太), 높을 고(高)'를 쓰는 '태오'는 ESTP의 대담하고 에너지 넘치는 기상이 세상을 압도하는 모습을 보여줍니다." },
+                { id:22, reason: "햇빛이나 달빛에 비치어 반짝이는 잔물결을 뜻하는 '윤슬'은, 방황 끝에 큰 깨달음을 얻은 요나처럼 ISFP/INFP/ENFP의 감성적인 영혼이 빛을 발하는 순간을 의미합니다." },
+                { id:23, reason: "현실적인 지혜로 헌신한 마르다처럼, '뜻 지(志), 빼어날 수(秀)'를 쓰는 '지수'는 ESFJ/ESTJ/ESFP의 따뜻한 마음과 현실적인 지혜가 조화를 이루는 모습을 담았습니다." },
+                { id:24, reason: "소심한 용사에서 위대한 지도자가 된 기드온처럼, '길 도(道), 빛날 윤(潤)'을 쓰는 '도윤'은 ISTP/ISFP/INTP가 자신만의 길을 걸으며 세상을 밝게 비추는 것을 의미합니다." },
+                { id:25, reason: "낡은 것을 버리고 새로운 삶을 택한 마태처럼, 순우리말 '새롬'은 ENTP/ENFP가 추구하는 진리의 새로움과 긍정적인 변화를 상징합니다." },
+                { id:26, reason: "굳건한 믿음의 다니엘처럼, '바를 결(潔)' 자를 쓰는 '결'은 어떤 상황에서도 원칙을 지키는 INTJ/ISTJ/ISTP의 깨끗하고 단단한 의지를 의미합니다." }
+            ]
+        },
+        en: {
+            name: 'English', flag: '🇺🇸', code: 'EN',
+            main_title: "Find Your Biblical Soul Name", main_desc: "Discover a special Korean name for you,<br>born from MBTI and biblical inspiration.",
+            start_btn: "Find My Name", loading_text: "Creating your name...",
+            result_p_1: "Your personality type is", result_p_2: "Your soul name is...",
+            reason_title: "The Meaning Behind the Name", retry_btn: "Retry", saju_link: "Find my Korean name via Saju analysis",
+            questions: [
+                { q: "When I relax, I...", a: [{ text: "Get energy from being around people.", type: "E" }, { text: "Recharge by spending time alone.", type: "I" }] },
+                { q: "When looking at a problem, I...", a: [{ text: "Trust realistic facts and experience more.", type: "S" }, { text: "See hidden meanings and future possibilities.", type: "N" }] },
+                { q: "When making a decision, I...", a: [{ text: "Think about what is fair and logical.", type: "T" }, { text: "First consider the impact on other people.", type: "F" }] },
+                { q: "When making an appointment, I...", a: [{ text: "Feel comfortable planning ahead and sticking to it.", type: "J" }, { text: "Enjoy responding flexibly to situations.", type: "P" }] },
+                { q: "In a new environment, I...", a: [{ text: "Tend to approach others first and start conversations.", type: "E" }, { text: "Tend to adapt slowly by observing calmly.", type: "I" }] },
+                { q: "I'm usually...", a: [{ text: "More drawn to concrete and practical information.", type: "S" }, { text: "Enjoy abstract and philosophical ideas.", type: "N" }] },
+                { q: "To a friend who is struggling, I...", a: [{ text: "Try to find an objective solution together.", type: "T" }, { text: "Comfort them warmly and empathize with their feelings.", type: "F" }] },
+                { q: "My living space is...", a: [{ text: "Maintained in a neat and tidy state.", type: "J" }, { text: "Prefer a free and comfortable atmosphere.", type: "P" }] },
+                { q: "When I express myself, I...", a: [{ text: "Show it through a wide range of experiences and activities.", type: "E" }, { text: "Show it through deep thoughts and values.", type: "I" }] },
+                { q: "My way of handling work is...", a: [{ text: "I prefer traditional and proven methods.", type: "S" }, { text: "I tend to try new and innovative methods.", type: "N" }] },
+                { q: "When I criticize, I...", a: [{ text: "Speak clearly based on truth and facts.", type: "T" }, { text: "Express myself carefully, considering the other person's feelings.", type: "F" }] },
+                { q: "When moving towards a goal...", a: [{ text: "I systematically set up and execute steps.", type: "J" }, { text: "I enjoy the process and explore new opportunities.", type: "P" }] },
+                { q: "At a large gathering...", a: [{ text: "I tend to mingle with many different people.", type: "E" }, { text: "I prefer to have a deep conversation with a small group of people I connect with.", type: "I" }] },
+                { q: "When listening to an explanation, I prefer...", a: [{ text: "A step-by-step explanation with concrete examples.", type: "S" }, { text: "An explanation through overall concepts or metaphors.", type: "N" }] },
+                { q: "When a conflict arises, I prioritize...", a: [{ text: "Clarifying what is right and wrong.", type: "T" }, { text: "Ensuring everyone's feelings are considered and maintaining harmony.", type: "F" }] },
+                { q: "If I suddenly have free time...", a: [{ text: "I act spontaneously without a set plan.", type: "P" }, { text: "I quickly make a plan for what to do with the time.", type: "J" }] },
+                { q: "When I feel my energy is low...", a: [{ text: "I want to meet people to get energized.", type: "E" }, { text: "I want to be completely alone to recharge.", type: "I" }] },
+                { q: "When I get a new device...", a: [{ text: "I read the manual carefully and follow the steps.", type: "S" }, { text: "I learn its functions by pressing buttons and figuring it out myself.", type: "N" }] },
+                { q: "If someone disagrees with my opinion...", a: [{ text: "I try to support my argument with logic rather than emotion.", type: "T" }, { text: "I worry that the atmosphere might become awkward.", type: "F" }] },
+                { q: "When packing for a trip, I...", a: [{ text: "Make a list of necessary items and pack meticulously.", type: "J" }, { text: "Pack the essentials roughly and handle the rest locally.", type: "P" }] },
+                { q: "Which expression is more comfortable for me?", a: [{ text: "Writing is more comfortable than speaking.", type: "I" }, { text: "Speaking is more comfortable than writing.", type: "E" }] },
+                { q: "What am I more often told I am?", a: [{ text: "Down-to-earth and practical.", type: "S" }, { text: "Imaginative and creative.", type: "N" }] },
+                { q: "What situation is more upsetting?", a: [{ text: "When my abilities are not recognized.", type: "T" }, { text: "When my efforts are not understood.", type: "F" }] },
+                { q: "I prefer my life to be...", a: [{ text: "Predictable and stable.", type: "J" }, { text: "Full of new stimuli and changes.", type: "P" }] }
+            ],
+            mbtiDescriptions: {
+                ISTJ: "The Salt of the Earth - Responsible and realistic, you are an icon of trust who always keeps promises.", ISFJ: "The Power Behind the Throne - A guardian who takes care of others with a warm heart and devotedly protects the community.", INFJ: "The Prophet - Understands people and the world with deep insight, moving forward with a belief in a better future.", INTJ: "The Scientist - An independent thinker who analyzes the world with outstanding strategy and vision, pursuing perfection in everything.", ISTP: "The Walking Encyclopedia - A versatile handyman who solves problems logically and practically, showing excellent adaptability in crises.", ISFP: "The Humble Saint - A humble artist with a warm heart who proves their worth through actions rather than words.", INFP: "The Joan of Arc - A passionate mediator who dreams of an ideal world and values their beliefs and values above all.", INTP: "The Idea Bank - An inventor who explores the world with endless curiosity and finds new possibilities through logic and analysis.", ESTP: "The Resourceful Activist - A realistic adventurer who knows how to enjoy life with overflowing energy and quick judgment.", ESFP: "The Socialite - A free spirit who brings joy to those around them with their innate optimism and sociability.", ENFP: "The Spark - Challenges new possibilities with fiery passion and rich imagination, giving positive inspiration to people.", ENTP: "The Debater - Explores the world with witty talk and brilliant ideas, enjoying intellectual stimulation through debate.", ESTJ: "The Entrepreneur - An excellent manager who leads organizations realistically with natural leadership and systematic management skills.", ESFJ: "The Goodwill Ambassador - A sociable diplomat who helps people with warm interest and practical advice, valuing community harmony.", ENFJ: "The Eloquent Speaker - A righteous social activist who leads people with charisma and ideals, dedicating themselves to community growth.", ENTJ: "The Leader - A commander who achieves goals with bold vision and strong will, leading people to create great change."
+            },
+            biblicalNames: [
+                { id:1, reason: "Combining characters for 'reason' (理) and 'standard' (準), 'Lee-jun' reflects Solomon's wisdom and the ISTJ's meticulousness, evoking a leader who builds a world on principles." },
+                { id:2, reason: "Like Ruth who showed devotion in a foreign land, 'Seo-yoon' uses characters for 'auspicious' (瑞) and 'sincere' (允) to express the ISFJ's character of spreading warm faith." },
+                { id:3, reason: "Meaning 'beautiful river,' 'Do-ha' (渡河) symbolizes the INFJ/INTJ/ENFJ's ability to lead people to a better future, like Joseph who saved a nation through his great dream." },
+                { id:4, reason: "Using characters for 'time' (時) and 'rain' (雨), 'Si-woo' signifies the wisdom of the INTJ/ENTJ/INTP arriving like timely rain in crucial moments, reflecting Paul's world-changing vision." },
+                { id:5, reason: "With characters for 'grace' (恩) and 'star' (星), 'Eun-seong' represents the positive influence of the ESTP/ISTP/ESFP, shining a guiding light in darkness, like Peter, the rock of faith." },
+                { id:6, reason: "'Ji-an' uses 'wisdom' (智) and 'peace' (安), capturing the ISFP/INFP/INFJ trait of bringing peace to a community through wisdom born of deep love, like John the Apostle of Love." },
+                { id:7, reason: "Like Elizabeth who received a blessing after a long wait, 'Ye-na,' using 'talent' (才) and 'beauty' (娜), signifies the beautiful talents that blossom from an INFP/ISFJ's warm faith." },
+                { id:8, reason: "Containing the character for 'truth' (眞), 'Yu-jin' symbolizes how the practical wisdom of the ENTP/ISTP creates 'true' value that benefits the world, like Rebecca's wise choices." },
+                { id:9, reason: "'Jae-yi' uses 'talent' (才) and 'joy' (怡) to show how the talent and positivity of the ESTP/ENTJ/ENTP ultimately bring joy, like Jacob who overcame trials to earn his blessing." },
+                { id:10, reason: "'Laon,' a native Korean word for 'joyful,' perfectly reflects the ESFP/ISFP/ENFP's nature of spreading happiness, just like Isaac, whose name means 'laughter'." },
+                { id:11, reason: "'Ha-ram,' meaning 'a precious person from God,' symbolizes the positive influence of the ENFP/ESFP/ENFJ's passion, akin to David's rich emotions and artistic inspiration." },
+                { id:12, reason: "Like the great leader Moses, the name 'Geon,' using the character 'to build' (建), symbolizes the strong leadership of the ESTJ/ISTJ/ENTJ who establishes order for all." },
+                { id:13, reason: "Using 'many' (多) and 'grace' (恩), 'Da-eun' signifies how the warm leadership of the ESFJ/ESTJ/ENTJ bestows great grace upon their community, like the prophetess Deborah." },
+                { id:14, reason: "'Chae-won,' using 'to fill' (採) and 'first' (元), captures how the brilliant leadership of the ENFJ/INFJ fills the world with beauty, reflecting Esther's courage to save her people." },
+                { id:15, reason: "Like Elijah who fought injustice, 'Kang-min,' using 'strong' (强) and 'agile' (敏), shows the strength and wisdom of the ENTJ/INTJ/ENTP in upholding beliefs." },
+                { id:16, reason: "Using 'beautiful' (韶) and 'law' (律), 'So-yul' represents the beautiful order of life created by the sincere heart of the ISFJ/INFJ/INFP, like Hannah whose prayers were answered." },
+                { id:17, reason: "Like Barnabas, the 'Son of Encouragement,' 'Seon-yul' ('good' 善, 'melody' 律) means the warm heart of the ENFJ/ESFJ/ENFP becomes a beautiful melody that comforts the world." },
+                { id:18, reason: "Using 'to show' (示) and 'warm' (溫), 'Si-on' signifies how the dedicated leadership of the ESTJ/ISTJ/ISFJ presents a warm vision to the community, like Nehemiah who rebuilt the walls." },
+                { id:19, reason: "Like Job who overcame extreme suffering, 'Yu-gyeom,' using 'to possess' (有) and 'humble' (謙), contains the deep character of the INFJ/ISTJ/ISFJ who remains humble even when having all." },
+                { id:20, reason: "'Ain,' meaning 'beautiful gem,' symbolizes the pure soul of the INFP/ISFP who seeks inner value over worldly noise, like Mary of Bethany who cherished the truth." },
+                { id:21, reason: "Like the superhumanly strong Samson, 'Tae-o,' using 'great' (太) and 'high' (高), shows the bold and energetic spirit of the ESTP overwhelming the world." },
+                { id:22, reason: "'Yoon-seul,' the glittering of ripples in the sun or moonlight, signifies the moment an ISFP/INFP/ENFP's emotional soul shines, like Jonah who found enlightenment after wandering." },
+                { id:23, reason: "Using 'will' (志) and 'outstanding' (秀), 'Ji-su' captures the harmony of a warm heart and practical wisdom in the ESFJ/ESTJ/ESFP, like Martha who served with practical devotion." },
+                { id:24, reason: "Like Gideon, who went from a timid man to a great leader, 'Do-yoon' ('path' 道, 'to shine' 潤) means the ISTP/ISFP/INTP brightly illuminates the world by walking their own path." },
+                { id:25, reason: "'Sae-rom,' a native Korean word for 'newness,' symbolizes the novelty and positive change pursued by the ENTP/ENFP, like Matthew who chose a new life." },
+                { id:26, reason: "Like the steadfast Daniel, the name 'Gyeol,' using the character 'pure' (潔), signifies the clean and strong will of the INTJ/ISTJ/ISTP who adheres to principles in any situation." }
+            ]
+        },
+        es: {
+            name: 'Spanish', flag: '🇪🇸', code: 'ES',
+            main_title: "Encuentra tu 'Nombre Bíblico del Alma'", main_desc: "Descubre un nombre coreano especial para ti,<br>nacido de la inspiración bíblica y del MBTI.",
+            start_btn: "Buscar mi Nombre", loading_text: "Creando tu nombre...",
+            result_p_1: "Tu tipo de personalidad es", result_p_2: "Tu nombre del alma es...",
+            reason_title: "El Significado del Nombre", retry_btn: "Reintentar", saju_link: "Encuentra mi nombre coreano a través del análisis Saju",
+            questions: [
+                { q: "Cuando me relajo, yo...", a: [{ text: "Obtengo energía al estar con gente.", type: "E" }, { text: "Me recargo pasando tiempo a solas.", type: "I" }] },
+                { q: "Al ver un problema, yo...", a: [{ text: "Confío más en los hechos y la experiencia realistas.", type: "S" }, { text: "Veo significados ocultos y posibilidades futuras.", type: "N" }] },
+                { q: "Al tomar una decisión, yo...", a: [{ text: "Pienso en lo que es justo y lógico.", type: "T" }, { text: "Considero primero el impacto en los demás.", type: "F" }] },
+                { q: "Al hacer una cita, yo...", a: [{ text: "Me siento cómodo planificando con anticipación y cumpliéndolo.", type: "J" }, { text: "Disfruto respondiendo con flexibilidad a las situaciones.", type: "P" }] },
+                { q: "En un nuevo entorno, yo...", a: [{ text: "Tiendo a acercarme a los demás primero e iniciar conversaciones.", type: "E" }, { text: "Tiendo a adaptarme lentamente observando con calma.", type: "I" }] },
+                { q: "Normalmente soy...", a: [{ text: "Más atraído por la información concreta y práctica.", type: "S" }, { text: "Disfruto de las ideas abstractas y filosóficas.", type: "N" }] },
+                { q: "A un amigo que está luchando, yo...", a: [{ text: "Intento encontrar una solución objetiva juntos.", type: "T" }, { text: "Le consuelo cálidamente y empatizo con sus sentimientos.", type: "F" }] },
+                { q: "Mi espacio vital está...", a: [{ text: "Mantenido en un estado limpio y ordenado.", type: "J" }, { text: "Prefiero un ambiente libre y cómodo.", type: "P" }] },
+                { q: "Cuando me expreso, yo...", a: [{ text: "Lo demuestro a través de una amplia gama de experiencias y actividades.", type: "E" }, { text: "Lo demuestro a través de pensamientos y valores profundos.", type: "I" }] },
+                { q: "Mi forma de manejar el trabajo es...", a: [{ text: "Prefiero los métodos tradicionales y probados.", type: "S" }, { text: "Tiendo a probar métodos nuevos e innovadores.", type: "N" }] },
+                { q: "Cuando critico, yo...", a: [{ text: "Hablo claramente basándome en la verdad y los hechos.", type: "T" }, { text: "Me expreso con cuidado, considerando los sentimientos de la otra persona.", type: "F" }] },
+                { q: "Al avanzar hacia una meta...", a: [{ text: "Establezco y ejecuto los pasos sistemáticamente.", type: "J" }, { text: "Disfruto el proceso y exploro nuevas oportunidades.", type: "P" }] },
+                { q: "En una gran reunión...", a: [{ text: "Tiendo a mezclarme con mucha gente diferente.", type: "E" }, { text: "Prefiero tener una conversación profunda con un pequeño grupo de personas con las que conecto.", type: "I" }] },
+                { q: "Al escuchar una explicación, prefiero...", a: [{ text: "Una explicación paso a paso con ejemplos concretos.", type: "S" }, { text: "Una explicación a través de conceptos generales o metáforas.", type: "N" }] },
+                { q: "Cuando surge un conflicto, priorizo...", a: [{ text: "Aclarar lo que está bien y lo que está mal.", type: "T" }, { text: "Asegurarme de que se consideren los sentimientos de todos y mantener la armonía.", type: "F" }] },
+                { q: "Si de repente tengo tiempo libre...", a: [{ text: "Actúo espontáneamente sin un plan establecido.", type: "P" }, { text: "Rápidamente hago un plan sobre qué hacer con el tiempo.", type: "J" }] },
+                { q: "Cuando siento que mi energía está baja...", a: [{ text: "Quiero reunirme con gente para energizarme.", type: "E" }, { text: "Quiero estar completamente solo para recargar.", type: "I" }] },
+                { q: "Cuando compro un dispositivo nuevo...", a: [{ text: "Leo el manual cuidadosamente y sigo los pasos.", type: "S" }, { text: "Aprendo sus funciones presionando botones y descubriéndolo por mí mismo.", type: "N" }] },
+                { q: "Si alguien no está de acuerdo con mi opinión...", a: [{ text: "Intento apoyar mi argumento con lógica en lugar de emoción.", type: "T" }, { text: "Me preocupa que el ambiente se vuelva incómodo.", type: "F" }] },
+                { q: "Al hacer la maleta para un viaje, yo...", a: [{ text: "Hago una lista de los artículos necesarios y empaco meticulosamente.", type: "J" }, { text: "Empaco lo esencial a grandes rasgos y me ocupo del resto en el lugar.", type: "P" }] },
+                { q: "¿Qué expresión me resulta más cómoda?", a: [{ text: "Escribir me resulta más cómodo que hablar.", type: "I" }, { text: "Hablar me resulta más cómodo que escribir.", type: "E" }] },
+                { q: "¿Qué me dicen más a menudo que soy?", a: [{ text: "Con los pies en la tierra y práctico.", type: "S" }, { text: "Imaginativo y creativo.", type: "N" }] },
+                { q: "¿Qué situación es más molesta?", a: [{ text: "Cuando no se reconocen mis habilidades.", type: "T" }, { text: "Cuando no se entienden mis esfuerzos.", type: "F" }] },
+                { q: "Prefiero que mi vida sea...", a: [{ text: "Predecible y estable.", type: "J" }, { text: "Llena de nuevos estímulos y cambios.", type: "P" }] }
+            ],
+            mbtiDescriptions: {
+                ISTJ: "La Sal de la Tierra - Responsable y realista, eres un ícono de confianza que siempre cumple sus promesas.", ISFJ: "El Poder Detrás del Trono - Un guardián que cuida a los demás con un corazón cálido y protege devotamente a la comunidad.", INFJ: "El Profeta - Comprende a las personas y al mundo con una profunda perspicacia, avanzando con la creencia en un futuro mejor.", INTJ: "El Científico - Un pensador independiente que analiza el mundo con una estrategia y visión sobresalientes, buscando la perfección en todo.", ISTP: "La Enciclopedia Andante - Un manitas versátil que resuelve problemas de forma lógica y práctica, mostrando una excelente adaptabilidad en las crisis.", ISFP: "El Santo Humilde - Un artista humilde con un corazón cálido que demuestra su valía a través de acciones en lugar de palabras.", INFP: "El Juana de Arco - Un mediador apasionado que sueña con un mundo ideal y valora sus creencias y valores por encima de todo.", INTP: "El Banco de Ideas - Un inventor que explora el mundo con una curiosidad infinita y encuentra nuevas posibilidades a través de la lógica y el análisis.", ESTP: "El Activista Ingenioso - Un aventurero realista que sabe cómo disfrutar de la vida con una energía desbordante y un juicio rápido.", ESFP: "El Socialité - Un espíritu libre que trae alegría a quienes lo rodean con su optimismo y sociabilidad innatos.", ENFP: "La Chispa - Desafía nuevas posibilidades con una pasión ardiente y una rica imaginación, dando inspiración positiva a la gente.", ENTP: "El Polemista - Explora el mundo con una conversación ingeniosa e ideas brillantes, disfrutando de la estimulación intelectual a través del debate.", ESTJ: "El Emprendedor - Un excelente gerente que lidera organizaciones de manera realista con un liderazgo natural y habilidades de gestión sistemática.", ESFJ: "El Embajador de Buena Voluntad - Un diplomático sociable que ayuda a las personas con un cálido interés y consejos prácticos, valorando la armonía de la comunidad.", ENFJ: "El Orador Elocuente - Un activista social justo que lidera a las personas con carisma e ideales, dedicándose al crecimiento de la comunidad.", ENTJ: "El Líder - Un comandante que logra sus metas con una visión audaz y una voluntad fuerte, llevando a la gente a crear un gran cambio."
+            },
+            biblicalNames: [
+                { id:1, reason: "Combinando caracteres para 'razón' (理) y 'estándar' (準), 'Lee-jun' refleja la sabiduría de Salomón y la meticulosidad del ISTJ, evocando a un líder que construye un mundo sobre principios." },
+                { id:2, reason: "Como Rut que mostró devoción en tierra extranjera, 'Seo-yoon' usa caracteres para 'auspicioso' (瑞) y 'sincero' (允) para expresar el carácter del ISFJ de difundir una fe cálida." },
+                { id:3, reason: "Con el significado de 'río hermoso', 'Do-ha' (渡河) simboliza la capacidad de INFJ/INTJ/ENFJ para guiar a la gente hacia un futuro mejor, como José que salvó a una nación con su gran sueño." },
+                { id:4, reason: "Usando caracteres para 'tiempo' (時) y 'lluvia' (雨), 'Si-woo' significa la sabiduría del INTJ/ENTJ/INTP que llega como lluvia oportuna en momentos cruciales, reflejando la visión de Pablo." },
+                { id:5, reason: "Con caracteres para 'gracia' (恩) y 'estrella' (星), 'Eun-seong' representa la influencia positiva del ESTP/ISTP/ESFP, una luz que guía en la oscuridad, como Pedro, la roca de la fe." },
+                { id:6, reason: "'Ji-an' usa 'sabiduría' (智) y 'paz' (安), capturando el rasgo del ISFP/INFP/INFJ de traer paz a través de una sabiduría nacida del amor profundo, como el apóstol Juan." },
+                { id:7, reason: "Como Isabel que recibió una bendición tras una larga espera, 'Ye-na', usando 'talento' (才) y 'belleza' (娜), significa los hermosos talentos que florecen de la cálida fe de un INFP/ISFJ." },
+                { id:8, reason: "Conteniendo el carácter de 'verdad' (眞), 'Yu-jin' simboliza cómo la sabiduría práctica del ENTP/ISTP crea un valor 'verdadero' que beneficia al mundo, como las sabias elecciones de Rebeca." },
+                { id:9, reason: "'Jae-yi' usa 'talento' (才) y 'alegría' (怡) para mostrar cómo el talento y la positividad del ESTP/ENTJ/ENTP traen alegría, como Jacob que superó pruebas para obtener su bendición." },
+                { id:10, reason: "'Laon', una palabra nativa coreana para 'alegre', refleja perfectamente la naturaleza del ESFP/ISFP/ENFP de difundir felicidad, al igual que Isaac, cuyo nombre significa 'risa'." },
+                { id:11, reason: "'Ha-ram', que significa 'una persona preciosa de Dios', simboliza la influencia positiva de la pasión del ENFP/ESFP/ENFJ, similar a las ricas emociones e inspiración artística de David." },
+                { id:12, reason: "Como el gran líder Moisés, el nombre 'Geon', que usa el carácter 'construir' (建), simboliza el fuerte liderazgo del ESTJ/ISTJ/ENTJ que establece el orden para todos." },
+                { id:13, reason: "Usando 'muchos' (多) y 'gracia' (恩), 'Da-eun' significa cómo el cálido liderazgo del ESFJ/ESTJ/ENTJ otorga gran gracia a su comunidad, como la profetisa Débora." },
+                { id:14, reason: "'Chae-won', que usa 'llenar' (採) y 'primero' (元), captura cómo el brillante liderazgo del ENFJ/INFJ llena el mundo de belleza, reflejando el coraje de Ester para salvar a su pueblo." },
+                { id:15, reason: "Como Elías que luchó contra la injusticia, 'Kang-min', que usa 'fuerte' (强) y 'ágil' (敏), muestra la fuerza y sabiduría del ENTJ/INTJ/ENTP para mantener sus creencias." },
+                { id:16, reason: "Usando 'hermoso' (韶) y 'ley' (律), 'So-yul' representa el hermoso orden de la vida creado por el corazón sincero del ISFJ/INFJ/INFP, como Ana cuyas oraciones fueron respondidas." },
+                { id:17, reason: "Como Bernabé, el 'Hijo de Consolación', 'Seon-yul' ('bueno' 善, 'melodía' 律) significa que el cálido corazón del ENFJ/ESFJ/ENFP se convierte en una hermosa melodía que consuela al mundo." },
+                { id:18, reason: "Usando 'mostrar' (示) y 'cálido' (溫), 'Si-on' significa cómo el liderazgo dedicado del ESTJ/ISTJ/ISFJ presenta una visión cálida a la comunidad, como Nehemías que reconstruyó los muros." },
+                { id:19, reason: "Como Job que superó un sufrimiento extremo, 'Yu-gyeom', que usa 'poseer' (有) y 'humilde' (謙), contiene el carácter profundo del INFJ/ISTJ/ISFJ que permanece humilde incluso teniéndolo todo." },
+                { id:20, reason: "'Ain', que significa 'gema hermosa', simboliza el alma pura del INFP/ISFP que busca el valor interior por encima del ruido mundano, como María de Betania que atesoraba la verdad." },
+                { id:21, reason: "Como el Sansón de fuerza sobrehumana, 'Tae-o', que usa 'grande' (太) y 'alto' (高), muestra el espíritu audaz y enérgico del ESTP que abruma al mundo." },
+                { id:22, reason: "'Yoon-seul', el brillo de las ondas en el sol o la luna, significa el momento en que el alma emocional de un ISFP/INFP/ENFP brilla, como Jonás que encontró la iluminación tras vagar." },
+                { id:23, reason: "Usando 'voluntad' (志) y 'sobresaliente' (秀), 'Ji-su' captura la armonía de un corazón cálido y sabiduría práctica en el ESFJ/ESTJ/ESFP, como Marta que sirvió con devoción práctica." },
+                { id:24, reason: "Como Gedeón, que pasó de ser un hombre tímido a un gran líder, 'Do-yoon' ('camino' 道, 'brillar' 潤) significa que el ISTP/ISFP/INTP ilumina brillantemente el mundo al seguir su propio camino." },
+                { id:25, reason: "'Sae-rom', una palabra nativa coreana para 'novedad', simboliza la novedad y el cambio positivo que persigue el ENTP/ENFP, como Mateo que eligió una nueva vida." },
+                { id:26, reason: "Como el firme Daniel, el nombre 'Gyeol', que usa el carácter 'puro' (潔), significa la voluntad limpia y fuerte del INTJ/ISTJ/ISTP que se adhiere a los principios en cualquier situación." }
+            ]
+        }
+    };
+    
+    // --- APPLICATION LOGIC ---
+    let currentLang = 'ko';
+    let currentQuestionIndex = 0;
+    let mbtiScores = { E: 0, I: 0, S: 0, N: 0, T: 0, F: 0, J: 0, P: 0 };
+    const dom = {
+        body: document.body,
+        startScreen: document.getElementById('start-screen'),
+        questionScreen: document.getElementById('question-screen'),
+        loadingScreen: document.getElementById('loading-screen'),
+        resultScreen: document.getElementById('result-screen'),
+        mainTitle: document.getElementById('main-title'),
+        mainDesc: document.getElementById('main-desc'),
+        startBtn: document.getElementById('start-btn'),
+        retryBtn: document.getElementById('retry-btn'),
+        questionBtns: document.querySelectorAll('.question-btn'),
+        progressBar: document.getElementById('progress-bar'),
+        questionText: document.getElementById('question-text'),
+        loadingText: document.getElementById('loading-text'),
+        mbtiType: document.getElementById('mbti-type'),
+        mbtiDescription: document.getElementById('mbti-description'),
+        soulName: document.getElementById('soul-name'),
+        originalName: document.getElementById('original-name'),
+        reason: document.getElementById('reason'),
+        resultP1: document.getElementById('result-p-1'),
+        resultP2: document.getElementById('result-p-2'),
+        reasonTitle: document.getElementById('reason-title'),
+        langSwitcher: document.getElementById('lang-switcher'),
+        langToggleBtn: document.getElementById('lang-toggle-btn'),
+        selectedLang: document.getElementById('selected-lang'),
+        langMenu: document.getElementById('lang-menu'),
+        langOptions: document.querySelectorAll('.lang-option'),
+        sajuLink: document.getElementById('saju-link')
+    };
+
+    dom.startBtn.addEventListener('click', startTest);
+    dom.retryBtn.addEventListener('click', resetTest);
+    dom.questionBtns.forEach(button => {
+        button.addEventListener('click', (e) => selectAnswer(e.target.dataset.type));
+    });
+    dom.langToggleBtn.addEventListener('click', () => {
+        dom.langMenu.classList.toggle('hidden');
+    });
+    dom.langOptions.forEach(option => {
+        option.addEventListener('click', (e) => {
+            e.preventDefault();
+            setLanguage(option.dataset.lang);
+            dom.langMenu.classList.add('hidden');
+        });
+    });
+    window.addEventListener('click', (e) => {
+        if (!dom.langSwitcher.contains(e.target)) {
+            dom.langMenu.classList.add('hidden');
+        }
+    });
+
+    function setLanguage(lang) {
+        currentLang = lang;
+        document.documentElement.lang = lang;
+        dom.body.className = `bg-gray-50 text-gray-800 flex items-center justify-center min-h-screen p-4 ${lang}`;
+        const t = langData[lang];
+        dom.selectedLang.innerHTML = `<span class="text-lg">${t.flag}</span> <span class="font-medium">${t.code}</span>`;
+        dom.langOptions.forEach(option => {
+            const langCode = option.dataset.lang;
+            const langInfo = langData[langCode];
+            option.innerHTML = `<span class="text-lg">${langInfo.flag}</span> <span class="font-medium">${langInfo.code}</span>`;
+        });
+        dom.mainTitle.textContent = t.main_title;
+        dom.mainDesc.innerHTML = t.main_desc;
+        dom.startBtn.textContent = t.start_btn;
+        dom.loadingText.textContent = t.loading_text;
+        dom.resultP1.textContent = t.result_p_1;
+        dom.resultP2.textContent = t.result_p_2;
+        dom.reasonTitle.textContent = t.reason_title;
+        dom.retryBtn.textContent = t.retry_btn;
+        dom.sajuLink.textContent = t.saju_link;
+    }
+
+    function startTest() {
+        dom.startScreen.classList.add('hidden');
+        dom.questionScreen.classList.remove('hidden');
+        dom.questionScreen.classList.add('fade-in');
+        currentQuestionIndex = 0;
+        mbtiScores = { E: 0, I: 0, S: 0, N: 0, T: 0, F: 0, J: 0, P: 0 };
+        showQuestion();
+    }
+
+    function showQuestion() {
+        const questions = langData[currentLang].questions;
+        const question = questions[currentQuestionIndex];
+        dom.questionText.textContent = question.q;
+        dom.questionBtns[0].textContent = question.a[0].text;
+        dom.questionBtns[0].dataset.type = question.a[0].type;
+        dom.questionBtns[1].textContent = question.a[1].text;
+        dom.questionBtns[1].dataset.type = question.a[1].type;
+        const progress = ((currentQuestionIndex + 1) / questions.length) * 100;
+        dom.progressBar.style.width = `${progress}%`;
+    }
+
+    function selectAnswer(type) {
+        mbtiScores[type]++;
+        currentQuestionIndex++;
+        if (currentQuestionIndex < langData[currentLang].questions.length) {
+            showQuestion();
+        } else {
+            showLoading();
+        }
+    }
+
+    function showLoading() {
+        dom.questionScreen.classList.add('hidden');
+        dom.loadingScreen.classList.remove('hidden');
+        setTimeout(calculateResult, 2000);
+    }
+
+    function calculateResult() {
+        let result = "";
+        result += mbtiScores.E > mbtiScores.I ? "E" : "I";
+        result += mbtiScores.S > mbtiScores.N ? "S" : "N";
+        result += mbtiScores.T > mbtiScores.F ? "T" : "F";
+        result += mbtiScores.J > mbtiScores.P ? "J" : "P";
+        findSoulName(result);
+    }
+
+    function findSoulName(mbtiType) {
+        const namePool = biblicalNamesDatabase.filter(name => name.associatedMBTI.includes(mbtiType));
+        let chosenName;
+        if (namePool.length > 0) {
+            chosenName = namePool[Math.floor(Math.random() * namePool.length)];
+        } else {
+            chosenName = { id: 0, koreanName: "은총", originalName: "기본값", associatedMBTI: [] };
+            if (!langData.ko.biblicalNames.find(n => n.id === 0)) {
+                langData.ko.biblicalNames.push({ id: 0, reason: "어떤 상황에서도 믿음을 지키는 당신의 모습에서 새로운 시작의 가능성을 봅니다." });
+                langData.en.biblicalNames.push({ id: 0, reason: "In your unwavering faith in any situation, we see the possibility of a new beginning." });
+                langData.es.biblicalNames.push({ id: 0, reason: "En tu fe inquebrantable en cualquier situación, vemos la posibilidad de un nuevo comienzo." });
+            }
+        }
+        displayResult(mbtiType, chosenName);
+    }
+
+    function displayResult(mbtiType, soulNameData) {
+        const translatedReasonObj = langData[currentLang].biblicalNames.find(n => n.id === soulNameData.id);
+        dom.mbtiType.textContent = mbtiType;
+        const mbtiDesc = langData[currentLang].mbtiDescriptions[mbtiType];
+        if (mbtiDesc) {
+            dom.mbtiDescription.textContent = mbtiDesc;
+        } else {
+            dom.mbtiDescription.textContent = "성향에 대한 설명을 찾을 수 없습니다.";
+        }
+        dom.soulName.textContent = soulNameData.koreanName;
+        dom.originalName.textContent = soulNameData.originalName;
+        dom.reason.textContent = translatedReasonObj ? translatedReasonObj.reason : "No reason found.";
+        dom.loadingScreen.classList.add('hidden');
+        dom.resultScreen.classList.remove('hidden');
+    }
+
+    function resetTest() {
+        dom.resultScreen.classList.add('hidden');
+        dom.startScreen.classList.remove('hidden');
+        dom.startScreen.classList.add('fade-in');
+    }
+
+    function initializeApp() {
+        const userLang = navigator.language.split('-')[0];
+        const initialLang = ['ko', 'en', 'es'].includes(userLang) ? userLang : 'ko';
+        setLanguage(initialLang);
+    }
+    
+    initializeApp();
+    </script>
 </body>
 </html>

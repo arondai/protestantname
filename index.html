@@ -1,18 +1,25 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html lang="en">
 <head>
+    <!-- Google Tag Manager -->
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-P99BS6NT');</script>
+    <!-- End Google Tag Manager -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MBTI 성격 유형으로 찾는 나의 '성경적 소울네임'</title>
+    <title>Find Your Biblical Soul Name</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&family=Montserrat:wght@400;500;700&display=swap" rel="stylesheet">
     <style>
         body {
-            font-family: 'Noto Sans KR', sans-serif;
+            font-family: 'Montserrat', sans-serif;
         }
-        .en body, .en [lang="en"] { font-family: 'Montserrat', sans-serif; }
+        .ko body, .ko [lang="ko"] { font-family: 'Noto Sans KR', sans-serif; }
         .es body, .es [lang="es"] { font-family: 'Montserrat', sans-serif; }
 
         .fade-in { animation: fadeIn 0.8s ease-in-out; }
@@ -76,6 +83,10 @@
      crossorigin="anonymous"></script>
 </head>
 <body class="bg-gray-50 text-gray-800 flex items-center justify-center min-h-screen p-4">
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-P99BS6NT"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
 
     <div class="w-full max-w-md mx-auto">
         
@@ -83,7 +94,7 @@
         <div id="start-screen" class="text-center p-6 fade-in">
             <!-- Title and Language Selector Container -->
             <div class="flex flex-wrap justify-center items-center gap-x-3 gap-y-2 mb-4">
-                <h1 id="main-title" class="text-3xl font-bold text-gray-900 whitespace-nowrap"></h1>
+                <h1 id="main-title" class="text-3xl font-bold text-gray-900"></h1>
                 
                 <!-- Language Dropdown -->
                 <div id="lang-switcher" class="relative">
@@ -229,6 +240,104 @@
 
     // --- LANGUAGE DATA STORE (v3.3 - 60 Names, Revised) ---
     const langData = {
+        en: {
+            name: 'English', flag: '🇺🇸', code: 'EN',
+            main_title: "Find Your Biblical Soul Name", main_desc: "Discover a special Korean name for you,<br>reinterpreted with the wisdom of biblical figures and your MBTI type.",
+            start_btn: "Find My Name", loading_text: "Creating your name...",
+            result_p_1: "Your personality type is", result_p_2: "Your soul name is...",
+            reason_title: "The Meaning Behind the Name", retry_btn: "Retry", saju_link: "Find my Korean name via Saju analysis",
+            questions: [
+                { q: "When I relax, I...", a: [{ text: "Get energy from being around people.", type: "E" }, { text: "Recharge by spending time alone.", type: "I" }] },
+                { q: "When looking at a problem, I...", a: [{ text: "Trust realistic facts and experience more.", type: "S" }, { text: "See hidden meanings and future possibilities.", type: "N" }] },
+                { q: "When making a decision, I...", a: [{ text: "Think about what is fair and logical.", type: "T" }, { text: "First consider the impact on other people.", type: "F" }] },
+                { q: "When making an appointment, I...", a: [{ text: "Feel comfortable planning ahead and sticking to it.", type: "J" }, { text: "Enjoy responding flexibly to situations.", type: "P" }] },
+                { q: "In a new environment, I...", a: [{ text: "Tend to approach others first and start conversations.", type: "E" }, { text: "Tend to adapt slowly by observing calmly.", type: "I" }] },
+                { q: "I'm usually...", a: [{ text: "More drawn to concrete and practical information.", type: "S" }, { text: "Enjoy abstract and philosophical ideas.", type: "N" }] },
+                { q: "To a friend who is struggling, I...", a: [{ text: "Try to find an objective solution together.", type: "T" }, { text: "Comfort them warmly and empathize with their feelings.", type: "F" }] },
+                { q: "My living space is...", a: [{ text: "Maintained in a neat and tidy state.", type: "J" }, { text: "Prefer a free and comfortable atmosphere.", type: "P" }] },
+                { q: "When I express myself, I...", a: [{ text: "Show it through a wide range of experiences and activities.", type: "E" }, { text: "Show it through deep thoughts and values.", type: "I" }] },
+                { q: "My way of handling work is...", a: [{ text: "I prefer traditional and proven methods.", type: "S" }, { text: "I tend to try new and innovative methods.", type: "N" }] },
+                { q: "When I criticize, I...", a: [{ text: "Speak clearly based on truth and facts.", type: "T" }, { text: "Express myself carefully, considering the other person's feelings.", type: "F" }] },
+                { q: "When moving towards a goal...", a: [{ text: "I systematically set up and execute steps.", type: "J" }, { text: "I enjoy the process and explore new opportunities.", type: "P" }] },
+                { q: "At a large gathering...", a: [{ text: "I tend to mingle with many different people.", type: "E" }, { text: "I prefer to have a deep conversation with a small group of people I connect with.", type: "I" }] },
+                { q: "When listening to an explanation, I prefer...", a: [{ text: "A step-by-step explanation with concrete examples.", type: "S" }, { text: "An explanation through overall concepts or metaphors.", type: "N" }] },
+                { q: "When a conflict arises, I prioritize...", a: [{ text: "Clarifying what is right and wrong.", type: "T" }, { text: "Ensuring everyone's feelings are considered and maintaining harmony.", type: "F" }] },
+                { q: "If I suddenly have free time...", a: [{ text: "I act spontaneously without a set plan.", type: "P" }, { text: "I quickly make a plan for what to do with the time.", type: "J" }] },
+                { q: "When I feel my energy is low...", a: [{ text: "I want to meet people to get energized.", type: "E" }, { text: "I want to be completely alone to recharge.", type: "I" }] },
+                { q: "When I get a new device...", a: [{ text: "I read the manual carefully and follow the steps.", type: "S" }, { text: "I learn its functions by pressing buttons and figuring it out myself.", type: "N" }] },
+                { q: "If someone disagrees with my opinion...", a: [{ text: "I try to support my argument with logic rather than emotion.", type: "T" }, { text: "I worry that the atmosphere might become awkward.", type: "F" }] },
+                { q: "When packing for a trip, I...", a: [{ text: "Make a list of necessary items and pack meticulously.", type: "J" }, { text: "Pack the essentials roughly and handle the rest locally.", type: "P" }] },
+                { q: "Which expression is more comfortable for me?", a: [{ text: "Writing is more comfortable than speaking.", type: "I" }, { text: "Speaking is more comfortable than writing.", type: "E" }] },
+                { q: "What am I more often told I am?", a: [{ text: "Down-to-earth and practical.", type: "S" }, { text: "Imaginative and creative.", type: "N" }] },
+                { q: "What situation is more upsetting?", a: [{ text: "When my abilities are not recognized.", type: "T" }, { text: "When my efforts are not understood.", type: "F" }] },
+                { q: "I prefer my life to be...", a: [{ text: "Predictable and stable.", type: "J" }, { text: "Full of new stimuli and changes.", type: "P" }] }
+            ],
+            mbtiDescriptions: {
+                ISTJ: "The Salt of the Earth - Responsible and realistic, you are an icon of trust who always keeps promises.", ISFJ: "The Silent Devotee - A guardian who takes care of others with a warm heart and devotedly protects the community.", INFJ: "The Prophet - Understands people and the world with deep insight, moving forward with a belief in a better future.", INTJ: "The Scientist - An independent thinker who analyzes the world with outstanding strategy and vision, pursuing perfection in everything.", ISTP: "The Walking Encyclopedia - A versatile handyman who solves problems logically and practically, showing excellent adaptability in crises.", ISFP: "The Humble Saint - A humble artist with a warm heart who proves their worth through actions rather than words.", INFP: "The Romantic Idealist - A passionate mediator who dreams of an ideal world and values their beliefs and values above all.", INTP: "The Idea Bank - An inventor who explores the world with endless curiosity and finds new possibilities through logic and analysis.", ESTP: "The Resourceful Activist - A realistic adventurer who knows how to enjoy life with overflowing energy and quick judgment.", ESFP: "The Socialite - A free spirit who brings joy to those around them with their innate optimism and sociability.", ENFP: "The Spark - Challenges new possibilities with fiery passion and rich imagination, giving positive inspiration to people.", ENTP: "The Debater - Explores the world with witty talk and brilliant ideas, enjoying intellectual stimulation through debate.", ESTJ: "The Entrepreneur - An excellent manager who leads organizations realistically with natural leadership and systematic management skills.", ESFJ: "The Goodwill Ambassador - A sociable diplomat who helps people with warm interest and practical advice, valuing community harmony.", ENFJ: "The Eloquent Speaker - A righteous social activist who leads people with charisma and ideals, dedicating themselves to community growth.", ENTJ: "The Leader - A commander who achieves goals with bold vision and strong will, leading people to create great change."
+            },
+            biblicalNames: [
+                { id:1, reason: "Combining characters for 'reason' (理) and 'standard' (準), 'Lee-jun' reflects Solomon's wisdom and the ISTJ's meticulousness, evoking a leader who builds a world on principles." },
+                { id:2, reason: "Like Ruth who showed devotion in a foreign land, 'Seo-yoon' uses characters for 'auspicious' (瑞) and 'sincere' (允) to express the ISFJ's character of spreading warm faith." },
+                { id:3, reason: "Meaning 'beautiful river,' 'Do-ha' (渡河) symbolizes the INFJ/INTJ/ENFJ's ability to lead people to a better future, like Joseph's vision." },
+                { id:4, reason: "Using characters for 'time' (時) and 'rain' (雨), 'Si-woo' signifies the wisdom of the INTJ/ENTJ/INTP arriving like timely rain in crucial moments, reflecting Paul's passion." },
+                { id:5, reason: "With characters for 'grace' (恩) and 'star' (星), 'Eun-seong' represents the positive influence of the ESTP/ISTP/ESFP, shining a guiding light in darkness, like Peter's faith." },
+                { id:6, reason: "'Ji-an' uses 'wisdom' (智) and 'peace' (安), capturing the ISFP/INFP/INFJ trait of bringing peace to a community through wisdom born of deep love, like John's love." },
+                { id:7, reason: "Like Elizabeth who received a blessing after a long wait, 'Ye-na,' using 'talent' (才) and 'beauty' (娜), signifies the beautiful talents that blossom from an INFP/ISFJ's warm faith." },
+                { id:8, reason: "Containing the character for 'truth' (眞), 'Yu-jin' symbolizes how the practical wisdom of the ENTP/ISTP creates 'true' value that benefits the world, like Rebecca's wisdom." },
+                { id:9, reason: "'Jae-yi' uses 'talent' (才) and 'joy' (怡) to show how the talent and positivity of the ESTP/ENTJ/ENTP ultimately bring joy, like Jacob's blessing." },
+                { id:10, reason: "'Laon,' a native Korean word for 'joyful,' perfectly reflects the ESFP/ISFP/ENFP's nature of spreading happiness, just like Isaac's laughter." },
+                { id:11, reason: "'Ha-ram,' meaning 'a precious person from God,' symbolizes the positive influence of the ENFP/ESFP/ENFJ's passion, akin to David's praise." },
+                { id:12, reason: "Like the great leader Moses, the name 'Geon,' using the character 'to build' (建), symbolizes the strong leadership of the ESTJ/ISTJ/ENTJ who establishes order for all." },
+                { id:13, reason: "Using 'many' (多) and 'grace' (恩), 'Da-eun' signifies how the warm leadership of the ESFJ/ESTJ/ENTJ bestows great grace upon their community, like Deborah's victory." },
+                { id:14, reason: "'Chae-won,' using 'to fill' (採) and 'first' (元), captures how the brilliant leadership of the ENFJ/INFJ fills the world with beauty, reflecting Esther's courage." },
+                { id:15, reason: "Like Elijah who fought injustice, 'Kang-min,' using 'strong' (强) and 'agile' (敏), shows the strength and wisdom of the ENTJ/INTJ/ENTP in upholding beliefs." },
+                { id:16, reason: "Using 'beautiful' (韶) and 'law' (律), 'So-yul' represents the beautiful order of life created by the sincere heart of the ISFJ/INFJ/INFP, like Hannah's prayer." },
+                { id:17, reason: "Like Barnabas, the 'Son of Encouragement,' 'Seon-yul' ('good' 善, 'melody' 律) means the warm heart of the ENFJ/ESFJ/ENFP becomes a beautiful melody that comforts the world." },
+                { id:18, reason: "Using 'to show' (示) and 'warm' (溫), 'Si-on' signifies how the dedicated leadership of the ESTJ/ISTJ/ISFJ presents a warm vision to the community, like Nehemiah's rebuilding." },
+                { id:19, reason: "Like Job who overcame extreme suffering, 'Yu-gyeom,' using 'to possess' (有) and 'humble' (謙), contains the deep character of the INFJ/ISTJ/ISFJ who remains humble even when having all." },
+                { id:20, reason: "'Ain,' meaning 'beautiful gem,' symbolizes the pure soul of the INFP/ISFP who seeks inner value over worldly noise, like Mary's purity." },
+                { id:21, reason: "Like the superhumanly strong Samson, 'Tae-o,' using 'great' (太) and 'high' (高), shows the bold and energetic spirit of the ESTP overwhelming the world." },
+                { id:22, reason: "'Yoon-seul,' the glittering of ripples in the sun or moonlight, signifies the moment an ISFP/INFP/ENFP's emotional soul shines, like Jonah's realization." },
+                { id:23, reason: "Using 'will' (志) and 'outstanding' (秀), 'Ji-su' captures the harmony of a warm heart and practical wisdom in the ESFJ/ESTJ/ESFP, like Martha's service." },
+                { id:24, reason: "Like Gideon, who went from a timid man to a great leader, 'Do-yoon' ('path' 道, 'to shine' 潤) means the ISTP/ISFP/INTP brightly illuminates the world by walking their own path." },
+                { id:25, reason: "'Sae-rom,' a native Korean word for 'newness,' symbolizes the novelty and positive change pursued by the ENTP/ENFP, like Matthew's transformation." },
+                { id:26, reason: "Like the steadfast Daniel, the name 'Gyeol,' using the character 'pure' (潔), signifies the clean and strong will of the INTJ/ISTJ/ISTP who adheres to principles in any situation." },
+                { id:27, reason: "Like Abraham, the father of faith, 'Ro-un' (로운), from 'wise' (슬기로울 로) and 'beneficial' (이로울 운), signifies the pioneering leadership of ENFJ/INFJ/ESTJ that opens new paths for everyone's benefit." },
+                { id:28, reason: "Like Sarah, mother of many nations, 'Ri-an' (리안), from 'reason' (리) and 'peace' (안), symbolizes the stable and wise care of ISFJ/ESFJ/ISTJ that brings peace to the community." },
+                { id:29, reason: "Like Miriam, who led the community in praise, 'Se-ah' (세아), from 'world' (세) and 'beautiful' (아), embodies the bright energy of ENFP/ESFP that makes the world beautiful." },
+                { id:30, reason: "Like the miracle of the Jordan River that paved a way where there was none, the native Korean word 'Ga-ram' (가람), meaning river, symbolizes the practical problem-solving ability and pioneering spirit of ISTP/ESTP/ISFP in creating new flows." },
+                { id:31, reason: "Like Noah's rainbow that signaled a new beginning, the native Korean word 'No-eul' (노을), meaning sunset, represents the beautiful scenery created by the deep sensitivity and hopeful worldview of INFP/ISFP." },
+                { id:32, reason: "Like Abigail, who wisely resolved conflict, 'Dan-ah' (단아), from 'elegant' (단) and 'graceful' (아), represents the elegant and wise problem-solving ability of INFJ/ISFJ." },
+                { id:33, reason: "Like Caleb, who advanced with positive faith, 'Ru-da' (루다), meaning 'to achieve one's will,' symbolizes the goal-oriented attitude and indomitable will of ESTP/ENTJ." },
+                { id:34, reason: "Like the Temple, the center of the world, the native Korean word 'Ma-ru' (마루), meaning 'summit' or 'center,' signifies that ISTJ/ISFJ are solid and essential beings who anchor the community." },
+                { id:35, reason: "Like Eve, the mother of all living, 'Bo-mi' (보미), meaning 'spring,' embodies the life-filled energy of ENFP/ESFJ that brings new vitality to their surroundings." },
+                { id:36, reason: "Like the steadfast Mount Sinai, the name 'San' (산), meaning mountain, symbolizes the unshakable faith, stability, and high ideals of ISTJ/INTJ." },
+                { id:37, reason: "Like the world-changing blast of the Jericho trumpets, the native Korean word 'So-ri' (소리), meaning sound, signifies that the bold and influential ideas of ENTP/ESTP will resonate loudly in the world." },
+                { id:38, reason: "Like the bountiful Garden of Eden, 'A-ram' (아람), meaning 'beautiful country,' symbolizes the rich world that the idealistic and creative worldview of INFP/ENFP will create." },
+                { id:39, reason: "Like the olive tree, a symbol of peace, 'I-sol' (이솔), meaning 'leading pine tree,' represents the inner strength and peace-loving heart of ISTP/ISFP." },
+                { id:40, reason: "Like the Queen of Sheba who sought wisdom, 'Je-na' (제나), from 'equal' (제) and 'beautiful' (나), symbolizes the beauty of the intellectual curiosity and confident leadership of ENTJ/INTJ." },
+                { id:41, reason: "Like the creation of the universe of infinite possibilities, the native Korean word 'Ha-neul' (하늘), meaning sky, represents the boundless imagination and intellectual world of INTP/INFP." },
+                { id:42, reason: "Like the resurrection, which means new life, the native Korean word 'Bom' (봄), meaning spring, symbolizes the new beginnings and hope brought by the warm sensitivity and positive worldview of ENFP/INFP." },
+                { id:43, reason: "Like the star that guided the Magi, the name 'Byeol' (별), meaning star, signifies that the deep insight and vision of INFJ/INTJ act as a beacon, showing the way in darkness." },
+                { id:44, reason: "Like Joshua, the leader who stopped the sun, 'Hae-sol' (해솔), a combination of 'sun' and 'pine tree,' symbolizes the powerful will and unchanging leadership of ESTJ/ENTJ." },
+                { id:45, reason: "The native Korean word 'Ga-on' (가온), meaning 'center,' signifies the important role of ISTJ/ESTJ in anchoring any organization or community." },
+                { id:46, reason: "'Na-rae' (나래), meaning 'wing,' symbolizes how the inspiration and message of ENFJ/INFJ spread hope to others, like the wings of an angel." },
+                { id:47, reason: "Like an evergreen pine tree, 'Da-sol' (다솔), meaning 'pine tree,' represents the consistent, dependable nature and unchanging devotion of ISFJ/ISTJ." },
+                { id:48, reason: "Like Israel, the people of God, 'La-el' (라엘), a feminine form of Raphael, contains the natural leadership and sense of mission of ENTJ/ENFJ to lead a community." },
+                { id:49, reason: "Like the serpent's wisdom that sometimes surprises the world, the native Korean word 'Mi-reu' (미르), meaning dragon, symbolizes the ability of ENTP/INTJ to break existing molds with insight and present unexpected solutions." },
+                { id:50, reason: "Like the Red Sea that opened a path, the name 'Ba-da' (바다), meaning sea, represents the unpredictable potential and challenging spirit of ESTP/ENTP moving toward new possibilities." },
+                { id:51, reason: "'Sae-byeok' (새벽), meaning dawn, which heralds the beginning of the world, symbolizes the deep contemplation and quiet insight of INFP/INFJ that opens a new era." },
+                { id:52, reason: "Like the proverbs, a treasure trove of wisdom, 'Seul-ah' (슬아), from 'wise' (슬) and 'child' (아), embodies the fruitful results of the wisdom and curiosity of INTP/ISTP." },
+                { id:53, reason: "Like the firmament, which means sky, the name 'Woo-ju' (우주), meaning universe, symbolizes the infinite ideas and vast intellectual world of INTP/ENTP." },
+                { id:54, reason: "Like green pastures, 'Cho-ah' (초아), meaning 'beautiful like grass,' represents the simple, natural beauty and comfort of ISFP/ESFP." },
+                { id:55, reason: "Like the monotheistic idea of one God, the native Korean word 'Ha-na' (하나), meaning one, symbolizes the firm convictions and deep self-assurance of INTJ/INFJ." },
+                { id:56, reason: "Like bestowed 'grace,' 'Hye-na' (혜나), from 'grace' (혜) and 'beautiful' (나), signifies the beautiful influence of the warm heart and dedication of ESFJ/ISFJ on their surroundings." },
+                { id:57, reason: "Like Elisha, who inherited his master's power, 'Ri-sa' (리사), from 'to rule' (리) and 'scholar' (사), symbolizes the wisdom and spiritual leadership of ENFJ/INFJ." },
+                { id:58, reason: "Like Aaron, the first high priest, the name 'Aaron' (아론) represents the dedication to the community and the role of a responsible mediator of ISFJ/ESFJ." },
+                { id:59, reason: "Like Enoch, who walked with God, the name 'Enoch' (에녹) symbolizes the deep spirituality and pure heart of INFJ/INFP in pursuit of ideals." },
+                { id:60, reason: "Like Jeremiah, the weeping prophet, 'Ye-rim' (예림), adding 'forest' (림), represents how the INFP's deep empathy can embrace the world's sorrows like a forest." }
+            ]
+        },
         ko: {
             name: 'Korean', flag: '🇰🇷', code: 'KR',
             main_title: "나의 '성경적 소울네임' 찾기", main_desc: "MBTI 성격 유형과 성경 인물의 지혜로 재해석한<br>당신만의 특별한 한국 이름을 찾아보세요.",
@@ -327,104 +436,6 @@
                 { id:60, reason: "눈물의 선지자 예레미야처럼, '수풀 림(林)'을 더한 '예림'은 INFP의 깊은 공감 능력이 세상의 아픔을 보듬는 숲과 같음을 나타냅니다." }
             ]
         },
-        en: {
-            name: 'English', flag: '🇺🇸', code: 'EN',
-            main_title: "Find Your Biblical Soul Name", main_desc: "Discover a special Korean name for you,<br>reinterpreted with the wisdom of biblical figures and your MBTI type.",
-            start_btn: "Find My Name", loading_text: "Creating your name...",
-            result_p_1: "Your personality type is", result_p_2: "Your soul name is...",
-            reason_title: "The Meaning Behind the Name", retry_btn: "Retry", saju_link: "Find my Korean name via Saju analysis",
-            questions: [
-                { q: "When I relax, I...", a: [{ text: "Get energy from being around people.", type: "E" }, { text: "Recharge by spending time alone.", type: "I" }] },
-                { q: "When looking at a problem, I...", a: [{ text: "Trust realistic facts and experience more.", type: "S" }, { text: "See hidden meanings and future possibilities.", type: "N" }] },
-                { q: "When making a decision, I...", a: [{ text: "Think about what is fair and logical.", type: "T" }, { text: "First consider the impact on other people.", type: "F" }] },
-                { q: "When making an appointment, I...", a: [{ text: "Feel comfortable planning ahead and sticking to it.", type: "J" }, { text: "Enjoy responding flexibly to situations.", type: "P" }] },
-                { q: "In a new environment, I...", a: [{ text: "Tend to approach others first and start conversations.", type: "E" }, { text: "Tend to adapt slowly by observing calmly.", type: "I" }] },
-                { q: "I'm usually...", a: [{ text: "More drawn to concrete and practical information.", type: "S" }, { text: "Enjoy abstract and philosophical ideas.", type: "N" }] },
-                { q: "To a friend who is struggling, I...", a: [{ text: "Try to find an objective solution together.", type: "T" }, { text: "Comfort them warmly and empathize with their feelings.", type: "F" }] },
-                { q: "My living space is...", a: [{ text: "Maintained in a neat and tidy state.", type: "J" }, { text: "Prefer a free and comfortable atmosphere.", type: "P" }] },
-                { q: "When I express myself, I...", a: [{ text: "Show it through a wide range of experiences and activities.", type: "E" }, { text: "Show it through deep thoughts and values.", type: "I" }] },
-                { q: "My way of handling work is...", a: [{ text: "I prefer traditional and proven methods.", type: "S" }, { text: "I tend to try new and innovative methods.", type: "N" }] },
-                { q: "When I criticize, I...", a: [{ text: "Speak clearly based on truth and facts.", type: "T" }, { text: "Express myself carefully, considering the other person's feelings.", type: "F" }] },
-                { q: "When moving towards a goal...", a: [{ text: "I systematically set up and execute steps.", type: "J" }, { text: "I enjoy the process and explore new opportunities.", type: "P" }] },
-                { q: "At a large gathering...", a: [{ text: "I tend to mingle with many different people.", type: "E" }, { text: "I prefer to have a deep conversation with a small group of people I connect with.", type: "I" }] },
-                { q: "When listening to an explanation, I prefer...", a: [{ text: "A step-by-step explanation with concrete examples.", type: "S" }, { text: "An explanation through overall concepts or metaphors.", type: "N" }] },
-                { q: "When a conflict arises, I prioritize...", a: [{ text: "Clarifying what is right and wrong.", type: "T" }, { text: "Ensuring everyone's feelings are considered and maintaining harmony.", type: "F" }] },
-                { q: "If I suddenly have free time...", a: [{ text: "I act spontaneously without a set plan.", type: "P" }, { text: "I quickly make a plan for what to do with the time.", type: "J" }] },
-                { q: "When I feel my energy is low...", a: [{ text: "I want to meet people to get energized.", type: "E" }, { text: "I want to be completely alone to recharge.", type: "I" }] },
-                { q: "When I get a new device...", a: [{ text: "I read the manual carefully and follow the steps.", type: "S" }, { text: "I learn its functions by pressing buttons and figuring it out myself.", type: "N" }] },
-                { q: "If someone disagrees with my opinion...", a: [{ text: "I try to support my argument with logic rather than emotion.", type: "T" }, { text: "I worry that the atmosphere might become awkward.", type: "F" }] },
-                { q: "When packing for a trip, I...", a: [{ text: "Make a list of necessary items and pack meticulously.", type: "J" }, { text: "Pack the essentials roughly and handle the rest locally.", type: "P" }] },
-                { q: "Which expression is more comfortable for me?", a: [{ text: "Writing is more comfortable than speaking.", type: "I" }, { text: "Speaking is more comfortable than writing.", type: "E" }] },
-                { q: "What am I more often told I am?", a: [{ text: "Down-to-earth and practical.", type: "S" }, { text: "Imaginative and creative.", type: "N" }] },
-                { q: "What situation is more upsetting?", a: [{ text: "When my abilities are not recognized.", type: "T" }, { text: "When my efforts are not understood.", type: "F" }] },
-                { q: "I prefer my life to be...", a: [{ text: "Predictable and stable.", type: "J" }, { text: "Full of new stimuli and changes.", type: "P" }] }
-            ],
-            mbtiDescriptions: {
-                ISTJ: "The Salt of the Earth - Responsible and realistic, you are an icon of trust who always keeps promises.", ISFJ: "The Silent Devotee - A guardian who takes care of others with a warm heart and devotedly protects the community.", INFJ: "The Prophet - Understands people and the world with deep insight, moving forward with a belief in a better future.", INTJ: "The Scientist - An independent thinker who analyzes the world with outstanding strategy and vision, pursuing perfection in everything.", ISTP: "The Walking Encyclopedia - A versatile handyman who solves problems logically and practically, showing excellent adaptability in crises.", ISFP: "The Humble Saint - A humble artist with a warm heart who proves their worth through actions rather than words.", INFP: "The Romantic Idealist - A passionate mediator who dreams of an ideal world and values their beliefs and values above all.", INTP: "The Idea Bank - An inventor who explores the world with endless curiosity and finds new possibilities through logic and analysis.", ESTP: "The Resourceful Activist - A realistic adventurer who knows how to enjoy life with overflowing energy and quick judgment.", ESFP: "The Socialite - A free spirit who brings joy to those around them with their innate optimism and sociability.", ENFP: "The Spark - Challenges new possibilities with fiery passion and rich imagination, giving positive inspiration to people.", ENTP: "The Debater - Explores the world with witty talk and brilliant ideas, enjoying intellectual stimulation through debate.", ESTJ: "The Entrepreneur - An excellent manager who leads organizations realistically with natural leadership and systematic management skills.", ESFJ: "The Goodwill Ambassador - A sociable diplomat who helps people with warm interest and practical advice, valuing community harmony.", ENFJ: "The Eloquent Speaker - A righteous social activist who leads people with charisma and ideals, dedicating themselves to community growth.", ENTJ: "The Leader - A commander who achieves goals with bold vision and strong will, leading people to create great change."
-            },
-            biblicalNames: [
-                { id:1, reason: "Combining characters for 'reason' (理) and 'standard' (準), 'Lee-jun' reflects Solomon's wisdom and the ISTJ's meticulousness, evoking a leader who builds a world on principles." },
-                { id:2, reason: "Like Ruth who showed devotion in a foreign land, 'Seo-yoon' uses characters for 'auspicious' (瑞) and 'sincere' (允) to express the ISFJ's character of spreading warm faith." },
-                { id:3, reason: "Meaning 'beautiful river,' 'Do-ha' (渡河) symbolizes the INFJ/INTJ/ENFJ's ability to lead people to a better future, like Joseph who saved a nation through his great dream." },
-                { id:4, reason: "Using characters for 'time' (時) and 'rain' (雨), 'Si-woo' signifies the wisdom of the INTJ/ENTJ/INTP arriving like timely rain in crucial moments, reflecting Paul's world-changing vision." },
-                { id:5, reason: "With characters for 'grace' (恩) and 'star' (星), 'Eun-seong' represents the positive influence of the ESTP/ISTP/ESFP, shining a guiding light in darkness, like Peter, the rock of faith." },
-                { id:6, reason: "'Ji-an' uses 'wisdom' (智) and 'peace' (安), capturing the ISFP/INFP/INFJ trait of bringing peace to a community through wisdom born of deep love, like John the Apostle of Love." },
-                { id:7, reason: "Like Elizabeth who received a blessing after a long wait, 'Ye-na,' using 'talent' (才) and 'beauty' (娜), signifies the beautiful talents that blossom from an INFP/ISFJ's warm faith." },
-                { id:8, reason: "Containing the character for 'truth' (眞), 'Yu-jin' symbolizes how the practical wisdom of the ENTP/ISTP creates 'true' value that benefits the world, like Rebecca's wise choices." },
-                { id:9, reason: "'Jae-yi' uses 'talent' (才) and 'joy' (怡) to show how the talent and positivity of the ESTP/ENTJ/ENTP ultimately bring joy, like Jacob who overcame trials to earn his blessing." },
-                { id:10, reason: "'Laon,' a native Korean word for 'joyful,' perfectly reflects the ESFP/ISFP/ENFP's nature of spreading happiness, just like Isaac, whose name means 'laughter'." },
-                { id:11, reason: "'Ha-ram,' meaning 'a precious person from God,' symbolizes the positive influence of the ENFP/ESFP/ENFJ's passion, akin to David's rich emotions and artistic inspiration." },
-                { id:12, reason: "Like the great leader Moses, the name 'Geon,' using the character 'to build' (建), symbolizes the strong leadership of the ESTJ/ISTJ/ENTJ who establishes order for all." },
-                { id:13, reason: "Using 'many' (多) and 'grace' (恩), 'Da-eun' signifies how the warm leadership of the ESFJ/ESTJ/ENTJ bestows great grace upon their community, like the prophetess Deborah." },
-                { id:14, reason: "'Chae-won,' using 'to fill' (採) and 'first' (元), captures how the brilliant leadership of the ENFJ/INFJ fills the world with beauty, reflecting Esther's courage to save her people." },
-                { id:15, reason: "Like Elijah who fought injustice, 'Kang-min,' using 'strong' (强) and 'agile' (敏), shows the strength and wisdom of the ENTJ/INTJ/ENTP in upholding beliefs." },
-                { id:16, reason: "Using 'beautiful' (韶) and 'law' (律), 'So-yul' represents the beautiful order of life created by the sincere heart of the ISFJ/INFJ/INFP, like Hannah whose prayers were answered." },
-                { id:17, reason: "Like Barnabas, the 'Son of Encouragement,' 'Seon-yul' ('good' 善, 'melody' 律) means the warm heart of the ENFJ/ESFJ/ENFP becomes a beautiful melody that comforts the world." },
-                { id:18, reason: "Using 'to show' (示) and 'warm' (溫), 'Si-on' signifies how the dedicated leadership of the ESTJ/ISTJ/ISFJ presents a warm vision to the community, like Nehemiah who rebuilt the walls." },
-                { id:19, reason: "Like Job who overcame extreme suffering, 'Yu-gyeom,' using 'to possess' (有) and 'humble' (謙), contains the deep character of the INFJ/ISTJ/ISFJ who remains humble even when having all." },
-                { id:20, reason: "'Ain,' meaning 'beautiful gem,' symbolizes the pure soul of the INFP/ISFP who seeks inner value over worldly noise, like Mary of Bethany who cherished the truth." },
-                { id:21, reason: "Like the superhumanly strong Samson, 'Tae-o,' using 'great' (太) and 'high' (高), shows the bold and energetic spirit of the ESTP overwhelming the world." },
-                { id:22, reason: "'Yoon-seul,' the glittering of ripples in the sun or moonlight, signifies the moment an ISFP/INFP/ENFP's emotional soul shines, like Jonah who found enlightenment after wandering." },
-                { id:23, reason: "Using 'will' (志) and 'outstanding' (秀), 'Ji-su' captures the harmony of a warm heart and practical wisdom in the ESFJ/ESTJ/ESFP, like Martha who served with practical devotion." },
-                { id:24, reason: "Like Gideon, who went from a timid man to a great leader, 'Do-yoon' ('path' 道, 'to shine' 潤) means the ISTP/ISFP/INTP brightly illuminates the world by walking their own path." },
-                { id:25, reason: "'Sae-rom,' a native Korean word for 'newness,' symbolizes the novelty and positive change pursued by the ENTP/ENFP, like Matthew who chose a new life." },
-                { id:26, reason: "Like the steadfast Daniel, the name 'Gyeol,' using the character 'pure' (潔), signifies the clean and strong will of the INTJ/ISTJ/ISTP who adheres to principles in any situation." },
-                { id:27, reason: "Like Abraham, the father of faith, 'Ro-un' (로운), from 'wise' (슬기로울 로) and 'beneficial' (이로울 운), signifies the pioneering leadership of ENFJ/INFJ/ESTJ that opens new paths for everyone's benefit." },
-                { id:28, reason: "Like Sarah, mother of many nations, 'Ri-an' (리안), from 'reason' (리) and 'peace' (안), symbolizes the stable and wise care of ISFJ/ESFJ/ISTJ that brings peace to the community." },
-                { id:29, reason: "Like Miriam, who led the community in praise, 'Se-ah' (세아), from 'world' (세) and 'beautiful' (아), embodies the bright energy of ENFP/ESFP that makes the world beautiful." },
-                { id:30, reason: "Like the miracle of the Jordan River that paved a way where there was none, the native Korean word 'Ga-ram' (가람), meaning river, symbolizes the practical problem-solving ability and pioneering spirit of ISTP/ESTP/ISFP in creating new flows." },
-                { id:31, reason: "Like Noah's rainbow that signaled a new beginning, the native Korean word 'No-eul' (노을), meaning sunset, represents the beautiful scenery created by the deep sensitivity and hopeful worldview of INFP/ISFP." },
-                { id:32, reason: "Like Abigail, who wisely resolved conflict, 'Dan-ah' (단아), from 'elegant' (단) and 'graceful' (아), represents the elegant and wise problem-solving ability of INFJ/ISFJ." },
-                { id:33, reason: "Like Caleb, who advanced with positive faith, 'Ru-da' (루다), meaning 'to achieve one's will,' symbolizes the goal-oriented attitude and indomitable will of ESTP/ENTJ." },
-                { id:34, reason: "Like the Temple, the center of the world, the native Korean word 'Ma-ru' (마루), meaning 'summit' or 'center,' signifies that ISTJ/ISFJ are solid and essential beings who anchor the community." },
-                { id:35, reason: "Like Eve, the mother of all living, 'Bo-mi' (보미), meaning 'spring,' embodies the life-filled energy of ENFP/ESFJ that brings new vitality to their surroundings." },
-                { id:36, reason: "Like the steadfast Mount Sinai, the name 'San' (산), meaning mountain, symbolizes the unshakable faith, stability, and high ideals of ISTJ/INTJ." },
-                { id:37, reason: "Like the world-changing blast of the Jericho trumpets, the native Korean word 'So-ri' (소리), meaning sound, signifies that the bold and influential ideas of ENTP/ESTP will resonate loudly in the world." },
-                { id:38, reason: "Like the bountiful Garden of Eden, 'A-ram' (아람), meaning 'beautiful country,' symbolizes the rich world that the idealistic and creative worldview of INFP/ENFP will create." },
-                { id:39, reason: "Like the olive tree, a symbol of peace, 'I-sol' (이솔), meaning 'leading pine tree,' represents the inner strength and peace-loving heart of ISTP/ISFP." },
-                { id:40, reason: "Like the Queen of Sheba who sought wisdom, 'Je-na' (제나), from 'equal' (제) and 'beautiful' (나), symbolizes the beauty of the intellectual curiosity and confident leadership of ENTJ/INTJ." },
-                { id:41, reason: "Like the creation of the universe of infinite possibilities, the native Korean word 'Ha-neul' (하늘), meaning sky, represents the boundless imagination and intellectual world of INTP/INFP." },
-                { id:42, reason: "Like the resurrection, which means new life, the native Korean word 'Bom' (봄), meaning spring, symbolizes the new beginnings and hope brought by the warm sensitivity and positive worldview of ENFP/INFP." },
-                { id:43, reason: "Like the star that guided the Magi, the name 'Byeol' (별), meaning star, signifies that the deep insight and vision of INFJ/INTJ act as a beacon, showing the way in darkness." },
-                { id:44, reason: "Like Joshua, the leader who stopped the sun, 'Hae-sol' (해솔), a combination of 'sun' and 'pine tree,' symbolizes the powerful will and unchanging leadership of ESTJ/ENTJ." },
-                { id:45, reason: "The native Korean word 'Ga-on' (가온), meaning 'center,' signifies the important role of ISTJ/ESTJ in anchoring any organization or community." },
-                { id:46, reason: "'Na-rae' (나래), meaning 'wing,' symbolizes how the inspiration and message of ENFJ/INFJ spread hope to others, like the wings of an angel." },
-                { id:47, reason: "Like an evergreen pine tree, 'Da-sol' (다솔), meaning 'pine tree,' represents the consistent, dependable nature and unchanging devotion of ISFJ/ISTJ." },
-                { id:48, reason: "Like Israel, the people of God, 'La-el' (라엘), a feminine form of Raphael, contains the natural leadership and sense of mission of ENTJ/ENFJ to lead a community." },
-                { id:49, reason: "Like the serpent's wisdom that sometimes surprises the world, the native Korean word 'Mi-reu' (미르), meaning dragon, symbolizes the ability of ENTP/INTJ to break existing molds with insight and present unexpected solutions." },
-                { id:50, reason: "Like the Red Sea that opened a path, the name 'Ba-da' (바다), meaning sea, represents the unpredictable potential and challenging spirit of ESTP/ENTP moving toward new possibilities." },
-                { id:51, reason: "'Sae-byeok' (새벽), meaning dawn, which heralds the beginning of the world, symbolizes the deep contemplation and quiet insight of INFP/INFJ that opens a new era." },
-                { id:52, reason: "Like the proverbs, a treasure trove of wisdom, 'Seul-ah' (슬아), from 'wise' (슬) and 'child' (아), embodies the fruitful results of the wisdom and curiosity of INTP/ISTP." },
-                { id:53, reason: "Like the firmament, which means sky, the name 'Woo-ju' (우주), meaning universe, symbolizes the infinite ideas and vast intellectual world of INTP/ENTP." },
-                { id:54, reason: "Like green pastures, 'Cho-ah' (초아), meaning 'beautiful like grass,' represents the simple, natural beauty and comfort of ISFP/ESFP." },
-                { id:55, reason: "Like the monotheistic idea of one God, the native Korean word 'Ha-na' (하나), meaning one, symbolizes the firm convictions and deep self-assurance of INTJ/INFJ." },
-                { id:56, reason: "Like bestowed 'grace,' 'Hye-na' (혜나), from 'grace' (혜) and 'beautiful' (나), signifies the beautiful influence of the warm heart and dedication of ESFJ/ISFJ on their surroundings." },
-                { id:57, reason: "Like Elisha, who inherited his master's power, 'Ri-sa' (리사), from 'to rule' (리) and 'scholar' (사), symbolizes the wisdom and spiritual leadership of ENFJ/INFJ." },
-                { id:58, reason: "Like Aaron, the first high priest, the name 'Aaron' (아론) represents the dedication to the community and the role of a responsible mediator of ISFJ/ESFJ." },
-                { id:59, reason: "Like Enoch, who walked with God, the name 'Enoch' (에녹) symbolizes the deep spirituality and pure heart of INFJ/INFP in pursuit of ideals." },
-                { id:60, reason: "Like Jeremiah, the weeping prophet, 'Ye-rim' (예림), adding 'forest' (림), represents how the INFP's deep empathy can embrace the world's sorrows like a forest." }
-            ]
-        },
         es: {
             name: 'Spanish', flag: '🇪🇸', code: 'ES',
             main_title: "Encuentra tu 'Nombre Bíblico del Alma'", main_desc: "Descubre un nombre coreano especial para ti,<br>reinterpretado con la sabiduría de figuras bíblicas y tu tipo de MBTI.",
@@ -463,33 +474,33 @@
             biblicalNames: [
                 { id:1, reason: "Combinando caracteres para 'razón' (理) y 'estándar' (準), 'Lee-jun' refleja la sabiduría de Salomón y la meticulosidad del ISTJ, evocando a un líder que construye un mundo sobre principios." },
                 { id:2, reason: "Como Rut que mostró devoción en tierra extranjera, 'Seo-yoon' usa caracteres para 'auspicioso' (瑞) y 'sincero' (允) para expresar el carácter del ISFJ de difundir una fe cálida." },
-                { id:3, reason: "Con el significado de 'río hermoso', 'Do-ha' (渡河) simboliza la capacidad de INFJ/INTJ/ENFJ para guiar a la gente hacia un futuro mejor, como José que salvó a una nación con su gran sueño." },
-                { id:4, reason: "Usando caracteres para 'tiempo' (時) y 'lluvia' (雨), 'Si-woo' significa la sabiduría del INTJ/ENTJ/INTP que llega como lluvia oportuna en momentos cruciales, reflejando la visión de Pablo." },
-                { id:5, reason: "Con caracteres para 'gracia' (恩) y 'estrella' (星), 'Eun-seong' representa la influencia positiva del ESTP/ISTP/ESFP, una luz que guía en la oscuridad, como Pedro, la roca de la fe." },
-                { id:6, reason: "'Ji-an' usa 'sabiduría' (智) y 'paz' (安), capturando el rasgo del ISFP/INFP/INFJ de traer paz a través de una sabiduría nacida del amor profundo, como el apóstol Juan." },
+                { id:3, reason: "Con el significado de 'río hermoso', 'Do-ha' (渡河) simboliza la capacidad de INFJ/INTJ/ENFJ para guiar a la gente hacia un futuro mejor, como la visión de José." },
+                { id:4, reason: "Usando caracteres para 'tiempo' (時) y 'lluvia' (雨), 'Si-woo' significa la sabiduría del INTJ/ENTJ/INTP que llega como lluvia oportuna en momentos cruciales, reflejando la pasión de Pablo." },
+                { id:5, reason: "Con caracteres para 'gracia' (恩) y 'estrella' (星), 'Eun-seong' representa la influencia positiva del ESTP/ISTP/ESFP, una luz que guía en la oscuridad, como la fe de Pedro." },
+                { id:6, reason: "'Ji-an' usa 'sabiduría' (智) y 'paz' (安), capturando el rasgo del ISFP/INFP/INFJ de traer paz a través de una sabiduría nacida del amor profundo, como el amor de Juan." },
                 { id:7, reason: "Como Isabel que recibió una bendición tras una larga espera, 'Ye-na', usando 'talento' (才) y 'belleza' (娜), significa los hermosos talentos que florecen de la cálida fe de un INFP/ISFJ." },
-                { id:8, reason: "Conteniendo el carácter de 'verdad' (眞), 'Yu-jin' simboliza cómo la sabiduría práctica del ENTP/ISTP crea un valor 'verdadero' que beneficia al mundo, como las sabias elecciones de Rebeca." },
-                { id:9, reason: "'Jae-yi' usa 'talento' (才) y 'alegría' (怡) para mostrar cómo el talento y la positividad del ESTP/ENTJ/ENTP traen alegría, como Jacob que superó pruebas para obtener su bendición." },
-                { id:10, reason: "'Laon', una palabra nativa coreana para 'alegre', refleja perfectamente la naturaleza del ESFP/ISFP/ENFP de difundir felicidad, al igual que Isaac, cuyo nombre significa 'risa'." },
-                { id:11, reason: "'Ha-ram', que significa 'una persona preciosa de Dios', simboliza la influencia positiva de la pasión del ENFP/ESFP/ENFJ, similar a las ricas emociones e inspiración artística de David." },
+                { id:8, reason: "Conteniendo el carácter de 'verdad' (眞), 'Yu-jin' simboliza cómo la sabiduría práctica del ENTP/ISTP crea un valor 'verdadero' que beneficia al mundo, como la sabiduría de Rebeca." },
+                { id:9, reason: "'Jae-yi' usa 'talento' (才) y 'alegría' (怡) para mostrar cómo el talento y la positividad del ESTP/ENTJ/ENTP traen alegría, como la bendición de Jacob." },
+                { id:10, reason: "'Laon', una palabra nativa coreana para 'alegre', refleja perfectamente la naturaleza del ESFP/ISFP/ENFP de difundir felicidad, al igual que la risa de Isaac." },
+                { id:11, reason: "'Ha-ram', que significa 'una persona preciosa de Dios', simboliza la influencia positiva de la pasión del ENFP/ESFP/ENFJ, similar a la alabanza de David." },
                 { id:12, reason: "Como el gran líder Moisés, el nombre 'Geon', que usa el carácter 'construir' (建), simboliza el fuerte liderazgo del ESTJ/ISTJ/ENTJ que establece el orden para todos." },
-                { id:13, reason: "Usando 'muchos' (多) y 'gracia' (恩), 'Da-eun' significa cómo el cálido liderazgo del ESFJ/ESTJ/ENTJ otorga gran gracia a su comunidad, como la profetisa Débora." },
-                { id:14, reason: "'Chae-won', que usa 'llenar' (採) y 'primero' (元), captura cómo el brillante liderazgo del ENFJ/INFJ llena el mundo de belleza, reflejando el coraje de Ester para salvar a su pueblo." },
+                { id:13, reason: "Usando 'muchos' (多) y 'gracia' (恩), 'Da-eun' significa cómo el cálido liderazgo del ESFJ/ESTJ/ENTJ otorga gran gracia a su comunidad, como la victoria de Débora." },
+                { id:14, reason: "'Chae-won', que usa 'llenar' (採) y 'primero' (元), captura cómo el brillante liderazgo del ENFJ/INFJ llena el mundo de belleza, reflejando el coraje de Ester." },
                 { id:15, reason: "Como Elías que luchó contra la injusticia, 'Kang-min', que usa 'fuerte' (强) y 'ágil' (敏), muestra la fuerza y sabiduría del ENTJ/INTJ/ENTP para mantener sus creencias." },
-                { id:16, reason: "Usando 'hermoso' (韶) y 'ley' (律), 'So-yul' representa el hermoso orden de la vida creado por el corazón sincero del ISFJ/INFJ/INFP, como Ana cuyas oraciones fueron respondidas." },
+                { id:16, reason: "Usando 'hermoso' (韶) y 'ley' (律), 'So-yul' representa el hermoso orden de la vida creado por el corazón sincero del ISFJ/INFJ/INFP, como la oración de Ana." },
                 { id:17, reason: "Como Bernabé, el 'Hijo de Consolación', 'Seon-yul' ('bueno' 善, 'melodía' 律) significa que el cálido corazón del ENFJ/ESFJ/ENFP se convierte en una hermosa melodía que consuela al mundo." },
-                { id:18, reason: "Usando 'mostrar' (示) y 'cálido' (溫), 'Si-on' significa cómo el liderazgo dedicado del ESTJ/ISTJ/ISFJ presenta una visión cálida a la comunidad, como Nehemías que reconstruyó los muros." },
+                { id:18, reason: "Usando 'mostrar' (示) y 'cálido' (溫), 'Si-on' significa cómo el liderazgo dedicado del ESTJ/ISTJ/ISFJ presenta una visión cálida a la comunidad, como la reconstrucción de Nehemías." },
                 { id:19, reason: "Como Job que superó un sufrimiento extremo, 'Yu-gyeom', que usa 'poseer' (有) y 'humilde' (謙), contiene el carácter profundo del INFJ/ISTJ/ISFJ que permanece humilde incluso teniéndolo todo." },
-                { id:20, reason: "'Ain', que significa 'gema hermosa', simboliza el alma pura del INFP/ISFP que busca el valor interior por encima del ruido mundano, como María de Betania que atesoraba la verdad." },
+                { id:20, reason: "'Ain', que significa 'gema hermosa', simboliza el alma pura del INFP/ISFP que busca el valor interior por encima del ruido mundano, como la pureza de María." },
                 { id:21, reason: "Como el Sansón de fuerza sobrehumana, 'Tae-o', que usa 'grande' (太) y 'alto' (高), muestra el espíritu audaz y enérgico del ESTP que abruma al mundo." },
-                { id:22, reason: "'Yoon-seul', el brillo de las ondas en el sol o la luna, significa el momento en que el alma emocional de un ISFP/INFP/ENFP brilla, como Jonás que encontró la iluminación tras vagar." },
-                { id:23, reason: "Usando 'voluntad' (志) y 'sobresaliente' (秀), 'Ji-su' captura la armonía de un corazón cálido y sabiduría práctica en el ESFJ/ESTJ/ESFP, como Marta que sirvió con devoción práctica." },
+                { id:22, reason: "'Yoon-seul', el brillo de las ondas en el sol o la luna, significa el momento en que el alma emocional de un ISFP/INFP/ENFP brilla, como la revelación de Jonás." },
+                { id:23, reason: "Usando 'voluntad' (志) y 'sobresaliente' (秀), 'Ji-su' captura la armonía de un corazón cálido y sabiduría práctica en el ESFJ/ESTJ/ESFP, como el servicio de Marta." },
                 { id:24, reason: "Como Gedeón, que pasó de ser un hombre tímido a un gran líder, 'Do-yoon' ('camino' 道, 'brillar' 潤) significa que el ISTP/ISFP/INTP ilumina brillantemente el mundo al seguir su propio camino." },
-                { id:25, reason: "'Sae-rom', una palabra nativa coreana para 'novedad', simboliza la novedad y el cambio positivo que persigue el ENTP/ENFP, como Mateo que eligió una nueva vida." },
+                { id:25, reason: "'Sae-rom', una palabra nativa coreana para 'novedad', simboliza la novedad y el cambio positivo que persigue el ENTP/ENFP, como la transformación de Mateo." },
                 { id:26, reason: "Como el firme Daniel, el nombre 'Gyeol', que usa el carácter 'puro' (潔), significa la voluntad limpia y fuerte del INTJ/ISTJ/ISTP que se adhiere a los principios en cualquier situación." },
                 { id:27, reason: "Como Abraham, el padre de la fe, 'Ro-un' (로운), de 'sabio' (슬기로울 로) y 'beneficioso' (이로울 운), significa el liderazgo pionero de ENFJ/INFJ/ESTJ que abre nuevos caminos para el beneficio de todos." },
                 { id:28, reason: "Como Sara, madre de muchas naciones, 'Ri-an' (리안), de 'razón' (리) y 'paz' (안), simboliza el cuidado estable y sabio de ISFJ/ESFJ/ISTJ que trae paz a la comunidad." },
-                { id:29, reason: "Como Miriam, que guió a la comunidad en alabanza, 'Se-ah' (세아), de 'mundo' (세) y 'hermosa' (아), encarna la energía brillante de ENFP/ESFP que embellece el mundo." },
+                { id:29, reason: "Como Miriam, que guió a la comunidad en alabanza, 'Se-ah' (세아), de 'mundo' (세) y 'hermosa' (아), encarna la energía brillante de ENFJ/INFJ que embellece el mundo." },
                 { id:30, reason: "Como el milagro del río Jordán que abrió un camino donde no lo había, la palabra nativa coreana 'Ga-ram' (가람), que significa río, simboliza la capacidad práctica para resolver problemas y el espíritu pionero de ISTP/ESTP/ISFP en la creación de nuevos flujos." },
                 { id:31, reason: "Como el arcoíris de Noé que señaló un nuevo comienzo, la palabra nativa coreana 'No-eul' (노을), que significa atardecer, representa el hermoso paisaje creado por la profunda sensibilidad y la visión esperanzadora del mundo de INFP/ISFP." },
                 { id:32, reason: "Como Abigail, que resolvió sabiamente el conflicto, 'Dan-ah' (단아), de 'elegante' (단) y 'graciosa' (아), representa la habilidad elegante y sabia para resolver problemas de INFJ/ISFJ." },
@@ -526,7 +537,7 @@
     };
     
     // --- APPLICATION LOGIC ---
-    let currentLang = 'ko';
+    let currentLang = 'en';
     let currentQuestionIndex = 0;
     let mbtiScores = { E: 0, I: 0, S: 0, N: 0, T: 0, F: 0, J: 0, P: 0 };
     const dom = {
@@ -687,8 +698,8 @@
     }
 
     function initializeApp() {
-        const userLang = navigator.language.split('-')[0];
-        const initialLang = ['en', 'es', 'ko'].includes(userLang) ? userLang : 'en';
+        // Set English as the default language
+        const initialLang = 'en';
         setLanguage(initialLang);
     }
     
